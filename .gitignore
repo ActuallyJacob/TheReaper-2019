@@ -1,0 +1,35 @@
+#######################
+##configuration files##
+#######################
+config.json
+package-lock.json
+
+################
+##node_modules##
+################
+node_modules
+
+#############
+##streamers##
+#############
+streamers\twitchStreamers.txt
+streamers\twitch
+streamers\mixerStreamers.txt
+streamers\mixer
+
+##################
+##unused folders##
+##################
+serializers
+monitors
+languages
+inhibitors
+finalizers
+extendables
+events
+bwd
+
+####################
+##command tmeplate##
+####################
+command_template
