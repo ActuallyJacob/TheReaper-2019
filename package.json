@@ -2,21 +2,21 @@
   "name": "thereaper",
   "version": "1.0.0",
   "description": "[![](https://img.shields.io/badge/node-js-blue.svg)](https://nodejs.org/en/) [![](https://img.shields.io/badge/discord-js-blue.svg)](https://github.com/hydrabolt/discord.js) [![](https://discordapp.com/api/guilds/352984490693623829/widget.png?style=shield)](https://discord.gg/JhyZARH)",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/the-maestro/thereaper"
+    "url": "https://github.com/the-maestro/TheReaper-2019"
   },
   "author": "Jacob Merali",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/the-maestro/thereaper/issues"
+    "url": "https://github.com/the-maestro/TheReaper-2019/issues"
   },
-  "homepage": "https://github.com/the-maestro/thereaper/blob/master/README.md",
+  "homepage": "https://github.com/the-maestro/TheReaper-2019/blob/master/README.md",
   "dependencies": {
     "bson": "^4.0.1",
     "carina": "^0.11.2",
