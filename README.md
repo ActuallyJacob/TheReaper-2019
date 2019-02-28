@@ -38,6 +38,7 @@ https://discord.gg/QuqtdsJ
 6. ?hug - hug someone!
 7. ?roast - roast someone
 8. ?event - create a custom community event (still in development)
+9. ?{meme-command} - lots of meme commands to use
 
 *Streaming*
 1. ?addMixer
@@ -54,7 +55,7 @@ https://discord.gg/QuqtdsJ
 
 **Updates:**
 
-*All updates listed are in the recode branch*
+*All updates listed are in the 2019 repo*
 1. Created permanent database using RethinkDB
 2. Can now add Mixer and Twitch streamers to DB
 3. Recognises when a Twitch streamer goes live
