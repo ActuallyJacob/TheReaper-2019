@@ -12,10 +12,7 @@ node_modules
 #############
 ##streamers##
 #############
-streamers\twitchStreamers.txt
-streamers\twitch
-streamers\mixerStreamers.txt
-streamers\mixer
+streamers
 
 ##################
 ##unused folders##
