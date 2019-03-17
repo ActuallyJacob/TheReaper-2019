@@ -3,9 +3,6 @@ const config = require('./config.json');
 const Discord = require ('discord.js');
 const fs = require('fs');
 const Idiot = require("idiotic-api");
-client.idiotAPI = new Idiot.Client(client.config.idiotKey, {
-    dev: true
-});
 
 const client = new KlasaClient({
     fetchAllMembers: false,
@@ -17,8 +14,6 @@ const client = new KlasaClient({
     providers: { default: 'mongodb' },
     readyMessage: (client) => `Successfully initialized. Ready to serve ${client.guilds.size} guilds.`
 });
-
-client.config = require('./config.json');
 
 // activity list
 client.on("ready", () => {
@@ -32,6 +27,11 @@ client.on("ready", () => {
         client.user.setActivity(activities_list[index]); // sets bot's activities to one of the phrases in the arraylist.
       }, 10000); // Runs this every 10 seconds.
 });
+
+client.config = require('./config.json');
+//client.idiotAPI = new Idiot.Client(client.config.idiotKey, {
+//    dev: true
+//});
 
 // some message events
 client.on("message", message => {

@@ -1,5 +1,4 @@
 const { Command, util: { isFunction } } = require('klasa');
-const Discord = require ('discord.js')
 
 module.exports = class extends Command {
 
@@ -18,12 +17,6 @@ module.exports = class extends Command {
 	}
 
 	async run(message, [command]) {
-		var settings = message.guild.settings
-		var sChannel = message.channel.id
-		if(sChannel !=(settings.commandChannel)){
-			return message.reply(`Please make a channel called ${settings.commandChannel} to use this command.`)
-		}
-		else{
 		if (command) {
 			const info = [
 				`= ${command.name} = `,
@@ -38,17 +31,16 @@ module.exports = class extends Command {
 		const categories = Object.keys(help);
 		const helpMessage = [];
 		for (let cat = 0; cat < categories.length; cat++) {
-			helpMessage.push("```" + `**${categories[cat]} Commands**:` + "```");
+			helpMessage.push(`**${categories[cat]} Commands**:`, '```asciidoc');
 			const subCategories = Object.keys(help[categories[cat]]);
 			for (let subCat = 0; subCat < subCategories.length; subCat++) helpMessage.push(`= ${subCategories[subCat]} =`, `${help[categories[cat]][subCategories[subCat]].join('\n')}\n`);
-			helpMessage.push('\u200b');
+			helpMessage.push('```', '\u200b');
 		}
 
 		return message.channel.send(helpMessage, { split: { char: '\u200b' } })
 			// .then(() => { if (message.channel.type !== 'dm') message.sendLocale('COMMAND_HELP_DM'); })
 			// .catch(() => { if (message.channel.type !== 'dm') message.sendLocale('COMMAND_HELP_NODM'); });
 	}
-}
 
 	async buildHelp(message) {
 		const help = {};

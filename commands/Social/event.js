@@ -1,4 +1,3 @@
-/*
 const {
     Command
 } = require('klasa');
@@ -10,28 +9,34 @@ module.exports = class extends Command {
             name: 'event',
             enabled: false,
             runIn: ['text'],
-            cooldown: 0,
-            deletable: false,
             bucket: 1,
-            aliases: [],
-            guarded: false,
-            nsfw: false,
             permissionLevel: 0,
-            requiredPermissions: [],
-            requiredSettings: [],
-            subcommands: false,
+            requiredSettings: ['commandChannel'],
             description: 'Create an event.',
-            quotedStringSupport: false,
-            usage: '?event',
-            usageDelim: undefined,
-            extendedHelp: 'No extended help available.'
+            usage: '?event'
         });
     }
 
     async run(message, [...params]) {
-        const Discord = require('discord.js')
+        /*
+        *Pre-requisits
+        */
+        /////////////////////////////////////////
+        var server = message.guild;
+        //
+        var channel = message.channel.id
+        //
+        const settings = server.settings;
+		//
+        const Discord = require ("discord.js");
+        //
+        const MessageEmbed = require("discord.js");
+		//
+        const sender = message.author;
+        //
         const memberavatar = message.member.user.avatarURL
-        const settings = message.guild.settings
+        /////////////////////////////////////////
+
         var setup = new Discord.MessageEmbed()
         .setTitle(":calendar: | Welcome to the event creation wizard.")
         .setColor('RANDOM')
@@ -44,9 +49,8 @@ module.exports = class extends Command {
         .setTimestamp()
         .setFooter("©TheReaper")
 
-    message.author.send(setup)
+    sender.send(setup)
 
         //TODO: message collector
     }
 };
-*/

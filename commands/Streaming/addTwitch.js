@@ -11,26 +11,14 @@ module.exports = class extends Command {
             name: 'addTwitch',
             enabled: false,
             runIn: ['text'],
-            cooldown: 0,
-            deletable: false,
             bucket: 1,
-            aliases: [],
-            guarded: false,
-            nsfw: false,
-            permissionLevel: 5, //any one with admin perms
-            requiredPermissions: [],
+            permissionLevel: 6, //any one with admin perms
             requiredSettings: ['twitchLiveChannel'],
-            subcommands: false,
             description: 'Used to add a Twitch streamer to your server.',
-            quotedStringSupport: false,
-            // usage: '',
-            usageDelim: undefined
-            // extendedHelp: 'No extended help available.'
         });
     }
 
     async run(message, [...params]) {
-        // This is where you place the code you want to run for your command
         const fs = require('fs')
         const fetch = require('node-fetch')
 

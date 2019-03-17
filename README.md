@@ -45,6 +45,7 @@ https://discord.gg/QuqtdsJ
 2. ?addTwitch
 3. ?delMixer
 4. ?delTwitch
+5. ?streamers
 
 **To-Do:**
 1. Create levels system

@@ -2,8 +2,6 @@ const {
     Command
 } = require('klasa');
 
-//some more big boi stuff. ?addmixer works fine but ?addtwitch needs some tweeks.
-
 module.exports = class extends Command {
 
     constructor(...args) {
@@ -11,26 +9,14 @@ module.exports = class extends Command {
             name: 'addMixer',
             enabled: true,
             runIn: ['text'],
-            cooldown: 0,
-            deletable: false,
             bucket: 1,
-            aliases: [],
-            guarded: false,
-            nsfw: false,
-            permissionLevel: 5, //any one with admin perms
-            requiredPermissions: [],
+            permissionLevel: 6, //any one with admin perms
             requiredSettings: ['mixerLiveChannel'],
-            subcommands: false,
             description: 'Used to add a Mixer streamer to your server.',
-            quotedStringSupport: false,
-            // usage: '',
-            usageDelim: undefined
-            // extendedHelp: 'No extended help available.'
         });
     }
 
     async run(message, [...params]) {
-        // This is where you place the code you want to run for your command
         const fs = require('fs')
         const fetch = require('node-fetch')
 
