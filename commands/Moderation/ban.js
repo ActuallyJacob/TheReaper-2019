@@ -42,7 +42,7 @@ module.exports = class extends Command {
         if (message.mentions.users.size == 0) return message.reply("The Reaper requires a specified user. **So do it**");
         const user = message.mentions.users.first();
         if (user === message.member) return message.reply("Are you mad? **You can't ban yourself.** *-Reaper*");
-        if (user === server.owner) return message.reply("I have stopped you from starting a military uprising, **you can't kick the server owner!**");
+        if (user === server.owner) return message.reply("I have stopped you from starting a military uprising, **you can't ban the server owner!**");
         if (user.kickable == false) return message.reply("I can't ban that guy! He's too powerful! *-Reaper*");
 
         //Then ban the user
@@ -57,7 +57,7 @@ module.exports = class extends Command {
         const banEmbed = new Discord.MessageEmbed()
             .setAuthor("TheReaper Moderation")
             .addField("Banned User", `${user} (${user.tag})`)
-            .addField("Moderator", `${sender} (${message.member.user.tag})`)
+            .addField("Moderator", `${sender}`)
             .addField("Reason", reason)
             .setFooter("Sent via TheReaper")
             .setThumbnail(user.displayAvatarURL())

@@ -32,13 +32,13 @@ module.exports = class extends Command {
         //
         const MessageEmbed = require("discord.js");
 		//
-        const sender = message.author.username;
+        const sender = message.author;
         /////////////////////////////////////////
 
         //addRole for roll call role
-        const addRole = server.roles.find(role => role.name === 'Roll Call');
+        let addRole = server.roles.find(role => role.name === 'Roll Call');
         if (!addRole){
-            message.channel.send(`**${sender}**, role not found. Creating now...`);
+            message.channel.send(`**${sender}**, "Roll Call" role not found. Creating now...`);
             addRole = server.roles.create({
                 data: {
                     name: 'Roll Call',
@@ -48,21 +48,24 @@ module.exports = class extends Command {
             })
             .then(console.log)
             .catch(console.error)
-        }
+            return message.channel.send(`"Roll Call" role created. Try the command again.`)
+        };
 
         //aRole for admin role
         const aRole = server.roles.find(role => role.id === settings.admin);
         if (!aRole){
             console.log(`!! NO '${settings.admin}' ROLE FOUND !!`)
-            return message.channel.send(`NO ${settings.admin} ROLE FOUND. PLEASE CORRECT BEFORE CONTINUING.`);
+            return message.channel.send(`**FATAL: NO ${settings.admin} ROLE FOUND. PLEASE CORRECT BEFORE CONTINUING.**`);
         }
+
         //if aRole exists
         else{
-            //filter bots and then confirm adding roles.
-            const filter = server.members.filter(message => !message.user.bot)
-            filter.map(async member => await member.roles.add(addRole))
-            await message.channel.send(`**${message.author.username}**, role **${addRole.name}** was added to all members`)
-                
+            //exlude bots and admins then add role
+            if(!message.member.roles.some(r=>[settings.admin].includes(r.id)) ){
+                server.members.filter(m => !m.user.bot).map(async member => await member.roles.add(addRole));
+                }
+            await message.channel.send(`${message.author.username}, role **${addRole.name}** was added to all members`);
+
             /*
             *now that all the roles have been done lets get the channel done.
             */
@@ -73,57 +76,47 @@ module.exports = class extends Command {
             /*
             *What to do if there's no uChannel or parentID
             */
+
+            /*
+            These are for the permissions
+            */
+            const serverID = server.id;
+            const adminID = server.roles.find(role => role.id === settings.admin);
+            let rollCall = server.roles.find(role => role.name === 'Roll Call');
+            const rollCallID = rollCall.id;
            
-            //no uChannel or parentID
-            if(!uChannel && !parentID){
-                var chaName = ("roll-call");
-                server.channels.create(chaName, {
-                    type: 'text',
-                    permissionOverwrites: [
-                        {
-                            id: server.id,
-                            deny: ['VIEW_CHANNEL'],
-
-                            id: addRole,
-                            allow: ['VIEW_CHANNEL'],
-
-                            id: aRole,
-                            allow: ['VIEW_CHANNEL'],
-                        },
-                    ]
-                })
-            };
             //no uChannel
-            if (!uChannel){
+            if(!uChannel){
                 var chaName = ("roll-call");
-                server.channels.create(chaName, {
+                await server.channels.create(chaName, {
                     type: 'text',
                     parent: parentID,
                     permissionOverwrites: [
                         {
-                            id: server.id,
+                            id: serverID,
                             deny: ['VIEW_CHANNEL'],
-
-                            id: addRole,
-                            allow: ['VIEW_CHANNEL'],
-
-                            id: aRole,
+                        },
+                        {
+                            id: adminID,
                             allow: ['VIEW_CHANNEL'],
                         },
+                        {
+                            id: rollCallID,
+                            allow: ['VIEW_CHANNEL'],
+                        }
                     ]
                 })
-            }
-            await server.channels.get(channel => channel.name === chaName).send(`**Roll-Call is now live! Please sign in roll-call to verify that you're still active within the clan and you'll be immediately removed!\n${addRole}\n\nLove --The Reaper**`)
-            .then (message.channel.send(`Rollcall Successful.`))
+            };
+            await server.channels.find(channel => channel.name === 'roll-call').send('test');
 
             //modlog embed
             const rollcallEmbed = new Discord.MessageEmbed()
             .setAuthor("TheReaper Moderation")
-            .addField("Roled All users")
-            .addField("Moderator", `${sender} (${message.member.user.tag})`)
-            .addField("Role", gRole)
+            .addField("Roled All users", "Rollcall")
+            .addField("Moderator", `${sender}`)
+            .addField("Role", addRole.name)
             .setFooter("Sent via TheReaper")
-            .setThumbnail(user.displayAvatarURL())
+            .setThumbnail(sender.displayAvatarURL())
             .setColor(0x9900FF);
             if (settings.modLog != null) {
                 var modLog = server.channels.get(settings.modLog)

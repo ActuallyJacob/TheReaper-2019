@@ -36,8 +36,12 @@ client.config = require('./config.json');
 // some message events
 client.on("message", message => {
     const guildMember = message.member;
+    var server = message.guild;
+    const settings = server.settings;
+    var reaperRole = server.roles.get(role => role.name === "The Reaper")
+    const reaperID = reaperRole.id
     if(message.channel.name === "roll-call"){
-        if (!guildMember.roles.some(r=>["Admin", "Lead Admin", "Co-Founder", "Founder"].includes(r.name)) ){
+        if (!guildMember.roles.some(r=>[settings.admin, reaperID].includes(r.id)) ){
             message.delete().catch(O_o=>{});
             let rRole = message.guild.roles.find(role => role.name === 'Roll Call');
             guildMember.roles.remove(rRole)

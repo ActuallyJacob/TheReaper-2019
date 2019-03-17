@@ -55,15 +55,12 @@ module.exports = class extends Command {
         const roleallEmbed = new Discord.MessageEmbed()
         .setAuthor("TheReaper Moderation")
         .addField("Roled All users")
-        .addField("Moderator", `${sender} (${message.member.user.tag})`)
-        .addField("Role", gRole)
+        .addField("Moderator", `${sender}`)
+        .addField("Role", gRole.name)
         .setFooter("Sent via TheReaper")
         .setThumbnail(user.displayAvatarURL())
         .setColor(0x9900FF);
         
-        message.channel.send({
-            embed: roleallEmbed
-        });
         if (settings.modLog != null) {
             var modLog = server.channels.get(settings.modLog)
             modLog.send({
@@ -72,6 +69,11 @@ module.exports = class extends Command {
                 message.react('❌');
                 message.channel.send(err.message);
             });
-        };
+        }
+        else{
+            message.channel.send({
+                embed: roleallEmbed
+            });
+        }
     };
 };

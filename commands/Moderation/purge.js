@@ -32,8 +32,16 @@ module.exports = class extends Command {
         //
         const MessageEmbed = require("discord.js");
 		//
-        const sender = message.author.username;
+        const sender = message.author;
         /////////////////////////////////////////
+
+        const purgeEmbed = new Discord.MessageEmbed()
+        .setAuthor("TheReaper Moderation")
+        .addField("Purged chat", `${message.channel.name}`)
+        .addField("Moderator", `${sender.username}`)
+        .setFooter("Sent via TheReaper")
+        .setThumbnail(sender.displayAvatarURL())
+        .setColor(0x9900FF);
 
         if (amount <= 0) {
             return message.reply('Pick a number. 1-100. *Now try again you fool*')
@@ -44,6 +52,12 @@ module.exports = class extends Command {
         if (amount >= 1 && amount <= 100) {
             message.channel.bulkDelete(amount)
             message.channel.send(`☑ Purged ${amount} message(s) from ${message.channel.name}`)
+            if (settings.modLog != null) {
+                var modLog = server.channels.get(settings.modLog)
+                modLog.send({
+                    embed: purgeEmbed
+                }).catch(err => console.log(err));
+            }
         }
     }
 };

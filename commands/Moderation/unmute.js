@@ -32,7 +32,7 @@ module.exports = class extends Command {
         //
         const MessageEmbed = require("discord.js");
 		//
-        const sender = message.author.username;
+        const sender = message.author;
         /////////////////////////////////////////
 
 		//Check role position
@@ -45,11 +45,11 @@ module.exports = class extends Command {
 		//unmute embed
 		const unMuteEmbed = new Discord.MessageEmbed()
 			.setAuthor("TheReaper Moderation")
-			.addField("Unmuted User", `${member} (${member.user.tag})`)
-			.addField("Moderator", `${sender} (${message.author.tag})`)
+			.addField("Unmuted User", `${member}`)
+			.addField("Moderator", `${sender.username} (${sender.tag})`)
 			.addField("Reason", reason)
 			.setFooter("Sent via TheReaper")
-			.setThumbnail(member.user.displayAvatarURL())
+			.setThumbnail(sender.displayAvatarURL())
 			.setColor(0x9900FF);
 
 		if (settings.modLog != null) {
@@ -59,10 +59,10 @@ module.exports = class extends Command {
 			}).catch(err => console.log(err));
 		}
 
-		return message.channel.send({
-			embed: unMuteEmbed
-		});
-
-		// return message.sendMessage(`${member.user.tag} was unmuted.${reason ? ` With reason of: ${reason}` : ''}`);
+		else{
+			return message.channel.send({
+				embed: unMuteEmbed
+			});
+		}
 	}
 };

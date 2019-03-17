@@ -50,20 +50,21 @@ module.exports = class extends Command {
         const role = message.mentions.roles.first();
 
         //My guild only
-        let fRole = server.roles.find("name", "Sorting Room");
+        let fRole = server.roles.find(role => role.name === "Sorting Room");
         if(rMember.roles.has(fRole.id)){
-          await(rMember.removeRole(fRole.id));
+          await(rMember.roles.remove(fRole.id));
         }
         
         //Remove role from user if they have it already
         if(rMember.roles.has(gRole.id)){
-          await(rMember.removeRole(gRole.id));
-          message.channel.send(`<@${rMember.id}> The Reaper has been sent to tell you that you no longer have the role of ${gRole.name} Contact an admin if you wish to enquire.`)
+          await(rMember.roles.remove(gRole.id));
+          var channel = server.channels.get(settings.commandChannel)
+          channel.send(`<@${rMember.id}> The Reaper has been sent to tell you that you no longer have the role of ${gRole.name} Contact an admin if you wish to enquire.`)
           //Removed role embed
           const rRoleEmbed = new Discord.MessageEmbed()
           .setAuthor("TheReaper Moderation")
           .addField("Un-Roled User", `${user} (${user.tag})`)
-          .addField("Moderator", `${sender} (${message.member.user.tag})`)
+          .addField("Moderator", `${sender}`)
           .addField("Role", role)
           .setFooter("Sent via TheReaper")
           .setThumbnail(user.displayAvatarURL())
@@ -83,8 +84,8 @@ module.exports = class extends Command {
         
         //Add role if they don't have it
         else{
-          await(rMember.addRole(gRole.id));
-          var channel = server.channels.find("name", "the-reaper")
+          await(rMember.roles.add(gRole.id));
+          var channel = server.channels.get(settings.commandChannel)
           channel.send(`<@${rMember.id}> The Reaper has been sent to tell you that you now have the role of ${gRole.name}. Do not abuse your newfound power.`)
           .catch((err) => {
             message.react('❌');
@@ -94,21 +95,22 @@ module.exports = class extends Command {
         const aRoleEmbed = new Discord.MessageEmbed()
           .setAuthor("TheReaper Moderation")
           .addField("Roled User", `${user} (${user.tag})`)
-          .addField("Moderator", `${sender} (${message.member.user.tag})`)
+          .addField("Moderator", `${sender}`)
           .addField("Role", role)
           .setFooter("Sent via TheReaper")
           .setThumbnail(user.displayAvatarURL())
           .setColor(0x9900FF);
-          
-          message.channel.send({
-              embed: aRoleEmbed
-            });
             
             if (settings.modLog != null) {
                 var modLog = server.channels.get(settings.modLog)
                 modLog.send({
                     embed: aRoleEmbed
                 }).catch(err => console.log(err));
+            }
+            else{
+                message.channel.send({
+                    embed: aRoleEmbed
+                });
             }
         };
     };

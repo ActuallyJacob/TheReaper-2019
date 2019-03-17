@@ -43,7 +43,7 @@ module.exports = class extends Command {
         const user = message.mentions.users.first();
         if (user === message.member) return message.reply("Are you mad? **You can't kick yourself.** *-Reaper*");
         if (user === server.owner) return message.reply("I have stopped you from starting a military uprising, **you can't kick the server owner!**");
-        if (user.kickable == false) return message.reply("I can't ban that guy! He's too powerful! *-Reaper*");
+        if (user.kickable == false) return message.reply("I can't kick that guy! He's too powerful! *-Reaper*");
 
         //and then kick
         await server.members.get(user.id).kick(sender.tag + " kicked via TheReaper").catch(err => {
@@ -58,7 +58,7 @@ module.exports = class extends Command {
         const kickEmbed = new Discord.MessageEmbed()
             .setAuthor("TheReaper Moderation")
             .addField("Kicked User", `${user} (${user.tag})`)
-            .addField("Moderator", `${sender} (${message.member.user.tag})`)
+            .addField("Moderator", `${sender}`)
             .addField("Reason", reason)
             .setFooter("Sent via TheReaper")
             .setThumbnail(user.displayAvatarURL())

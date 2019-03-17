@@ -32,7 +32,7 @@ module.exports = class extends Command {
         //
         const MessageEmbed = require("discord.js");
 		//
-        const sender = message.author.username;
+        const sender = message.author;
         /////////////////////////////////////////
 
         //start checking if they did the command right
@@ -53,7 +53,7 @@ module.exports = class extends Command {
         const warnEmbed = new Discord.MessageEmbed()
             .setAuthor("TheReaper Moderation")
             .addField("Warned User", `${user} (${user.tag})`)
-            .addField("Moderator", `${sender} (${message.member.user.tag})`)
+            .addField("Moderator", `${sender.username}`)
             .addField("Reason", reason)
             .setFooter("Sent via TheReaper")
             .setThumbnail(user.displayAvatarURL())
@@ -69,8 +69,5 @@ module.exports = class extends Command {
                 embed: warnEmbed
             }).catch(err => console.log(err));
         }
-
-
-
     }
 };
