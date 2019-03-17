@@ -113,7 +113,7 @@ module.exports = class extends Command {
             const rollcallEmbed = new Discord.MessageEmbed()
             .setAuthor("TheReaper Moderation")
             .addField("Roled All users", "Rollcall")
-            .addField("Moderator", `${sender}`)
+            .addField("Moderator", `${sender.username} (${sender.tag})`)
             .addField("Role", addRole.name)
             .setFooter("Sent via TheReaper")
             .setThumbnail(sender.displayAvatarURL())

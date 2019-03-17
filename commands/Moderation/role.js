@@ -32,7 +32,7 @@ module.exports = class extends Command {
         //
         const MessageEmbed = require("discord.js");
 		//
-        const sender = message.author.username;
+        const sender = message.author;
         /////////////////////////////////////////
 
         //Get first mentioned member
@@ -64,7 +64,7 @@ module.exports = class extends Command {
           const rRoleEmbed = new Discord.MessageEmbed()
           .setAuthor("TheReaper Moderation")
           .addField("Un-Roled User", `${user} (${user.tag})`)
-          .addField("Moderator", `${sender}`)
+          .addField("Moderator", `${sender.username} (${sender.tag})`)
           .addField("Role", role)
           .setFooter("Sent via TheReaper")
           .setThumbnail(user.displayAvatarURL())
@@ -95,7 +95,7 @@ module.exports = class extends Command {
         const aRoleEmbed = new Discord.MessageEmbed()
           .setAuthor("TheReaper Moderation")
           .addField("Roled User", `${user} (${user.tag})`)
-          .addField("Moderator", `${sender}`)
+          .addField("Moderator", `${sender.username} (${sender.tag})`)
           .addField("Role", role)
           .setFooter("Sent via TheReaper")
           .setThumbnail(user.displayAvatarURL())

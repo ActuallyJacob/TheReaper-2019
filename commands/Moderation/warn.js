@@ -53,7 +53,7 @@ module.exports = class extends Command {
         const warnEmbed = new Discord.MessageEmbed()
             .setAuthor("TheReaper Moderation")
             .addField("Warned User", `${user} (${user.tag})`)
-            .addField("Moderator", `${sender.username}`)
+            .addField("Moderator", `${sender.username} (${sender.tag})`)
             .addField("Reason", reason)
             .setFooter("Sent via TheReaper")
             .setThumbnail(user.displayAvatarURL())

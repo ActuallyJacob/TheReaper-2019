@@ -45,7 +45,7 @@ module.exports = class extends Command {
 		//unmute embed
 		const unMuteEmbed = new Discord.MessageEmbed()
 			.setAuthor("TheReaper Moderation")
-			.addField("Unmuted User", `${member}`)
+			.addField("Unmuted User", `${member} (${member.user.tag})`)
 			.addField("Moderator", `${sender.username} (${sender.tag})`)
 			.addField("Reason", reason)
 			.setFooter("Sent via TheReaper")

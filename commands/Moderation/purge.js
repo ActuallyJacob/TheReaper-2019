@@ -38,7 +38,7 @@ module.exports = class extends Command {
         const purgeEmbed = new Discord.MessageEmbed()
         .setAuthor("TheReaper Moderation")
         .addField("Purged chat", `${message.channel.name}`)
-        .addField("Moderator", `${sender.username}`)
+        .addField("Moderator", `${sender.username} (${sender.tag})`)
         .setFooter("Sent via TheReaper")
         .setThumbnail(sender.displayAvatarURL())
         .setColor(0x9900FF);

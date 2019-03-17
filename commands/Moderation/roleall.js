@@ -55,7 +55,7 @@ module.exports = class extends Command {
         const roleallEmbed = new Discord.MessageEmbed()
         .setAuthor("TheReaper Moderation")
         .addField("Roled All users")
-        .addField("Moderator", `${sender}`)
+        .addField("Moderator", `${sender.username} (${sender.tag})`)
         .addField("Role", gRole.name)
         .setFooter("Sent via TheReaper")
         .setThumbnail(user.displayAvatarURL())
