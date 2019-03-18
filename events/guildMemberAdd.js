@@ -1,6 +1,7 @@
 const {
 	Event
 } = require('klasa');
+const config = require('../config.json');
 
 module.exports = class extends Event {
 
@@ -14,7 +15,7 @@ module.exports = class extends Event {
 			return
         }
         if(settings.welcomeChannel !=null && settings.sendWelcomeMessage == true) {
-            var welcomeChannel = settings.welcomeChannel
+            const welcomeChannel = member.guild.channels.get(settings.welcomeChannel);
             var memberavatar = member.user.avatarURL
             if(member.guild.id === config.myGuild){
                 var embed = new Discord.MessageEmbed()
@@ -32,7 +33,8 @@ module.exports = class extends Event {
                 .setColor('RANDOM')
                 .setThumbnail(memberavatar)
                 .addField(':bust_in_silhouette: | name: ', `${member}`)
-                .addField(':microphone2: | Welcome!', `Welcome to the ${member.guild.name} server! `, `${settings.welcomeMessage}`)
+                .addField(':microphone2: | Welcome!', `Welcome to the ${member.guild.name} server! `)
+                .addField(':microphone2: | Custom Welcome Message:', `${settings.welcomeMessage}`)
                 .addField(':family_mwgb: | You are member number:', `${member.guild.memberCount}`)
                 .setFooter(`Server: ${member.guild.name}`)
                 .setTimestamp()
@@ -51,7 +53,7 @@ module.exports = class extends Event {
             welcomeChannel.send(embed)
         }
         if(settings.rulesChannel !=null && settings.sendRulesMessage == true) {
-            var rulesChannel = settings.rulesChannel
+            const rulesChannel = member.guild.channels.get(settings.rulesChannel);
             var memberavatar = member.user.avatarURL
             if(member.guild.id === config.myGuild){
                 var embed = new Discord.MessageEmbed()
@@ -64,7 +66,7 @@ module.exports = class extends Event {
                 .addField(':white_check_mark: | **Rule. 3:**', 'The Admin team has an open door policy. The leaders of Reaper Clan are always available to discuss or answer questions and/or concerns.')
                 .addField(':white_check_mark: | **Rule. 4:**', 'Activity in game and in discord is required. If personal issues keep you from being active for 2+ weeks, please allow us to know. Random activity checks happen in form of a Discord roll call, please sign this if you wish to stay in the clan.')
                 .addField(':white_check_mark: | **Rule. 5:**', 'There are lots of rooms to talk in this Discord, please try to indulge in them all and use them for their specified purpose. Most of all, have fun with your fellow Reapers!')
-                .addField(':smiley: | **Please Note**', 'These are our rules, and need to be adhered to by all. If you have any questions about them, please ask an Admin by simply typing in this channel. If not please type **-accept** to gain full access to the Discord Server, and be put into the sorting room. Thank you!')
+                .addField(':smiley: | **Please Note**', 'These are our rules, and need to be adhered to by all. If you have any questions about them, please ask an Admin by simply typing in this channel. If not please type **?accept** to gain full access to the Discord Server, and be put into the sorting room. Thank you!')
                 .addField(':family_mwgb: | You are member number:', `${member.guild.memberCount}`)
                 .setFooter(`Server: ${member.guild.name}`)
                 .setTimestamp()
@@ -75,7 +77,8 @@ module.exports = class extends Event {
                 .setColor('RANDOM')
                 .setThumbnail(memberavatar)
                 .addField(':bust_in_silhouette: | name: ', `${member}`)
-                .addField(':microphone2 | Welcome! Please read through and follow these rules:', `${rules}`)
+                .addField(':microphone2: | Welcome! Please read through and follow these rules:', `${rules}`)
+                .addField(':microphone2: | Accept', 'To accept these rules type: **?accept**')
                 .setFooter(`Server: ${member.guild.name}`)
                 .setTimestamp()
             }

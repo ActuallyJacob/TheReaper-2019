@@ -33,7 +33,7 @@ module.exports = class extends Command {
         //
         const MessageEmbed = require("discord.js");
 		//
-        const sender = message.author.username;
+        const sender = message.author;
         /////////////////////////////////////////
 		
 		//Do some member/sender checks
@@ -61,7 +61,7 @@ module.exports = class extends Command {
 			const muteEmbed = new Discord.MessageEmbed()
 				.setAuthor("TheReaper Moderation")
 				.addField("Muted User", `${member} (${member.user.tag})`)
-				.addField("Moderator", `${sender} (${message.author.tag})`)
+				.addField("Moderator", `${sender.username} (${sender.tag})`)
 				.addField("Time", Duration.toNow(when))
 				.addField("Reason", reason)
 				.setFooter("Sent via TheReaper")

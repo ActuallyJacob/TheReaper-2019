@@ -29,55 +29,13 @@ client.on("ready", () => {
 });
 
 client.config = require('./config.json');
-//client.idiotAPI = new Idiot.Client(client.config.idiotKey, {
-//    dev: true
-//});
 
-// some message events
-client.on("message", message => {
-    const guildMember = message.member;
-    var server = message.guild;
-    const settings = server.settings;
-    var reaperRole = server.roles.get(role => role.name === "The Reaper")
-    const reaperID = reaperRole.id
-    if(message.channel.name === "roll-call"){
-        if (!guildMember.roles.some(r=>[settings.admin, reaperID].includes(r.id)) ){
-            message.delete().catch(O_o=>{});
-            let rRole = message.guild.roles.find(role => role.name === 'Roll Call');
-            guildMember.roles.remove(rRole)
-            .then(message => console.log(chalk.green(`${message.user.username} Just signed the Roll Call!`)))
-            }
-        }
-        else{
-            return;
-        }
-      if(message.channel.name === "about-me"){
-        let nRole = message.guild.roles.find(role => role.name === 'About Me');
-        if(!guildMember.roles.some(r =>[nRole].includes(r.name)) ){
-          guildMember.roles.add(nRole)
-          .then(console.log(chalk.blue(`${message.author.username} Wrote in the #about-me. Good man.`)))
-          .catch(console.error(chalk.red));
-        }
-        else{
-            return;
-        }
-      }
-      if(message.channel.name === "code-of-conduct"){
-        if(message.content.toLowerCase() === "accept"){
-          message.delete().catch(O_o=>{});
-          let rMember = guildMember.user.id
-          var role = message.guild.roles.find(role => role.name === 'Sorting Room');
-          guildMember.roles.add(role);
-          message.reply("The Reaper welcomes you to the family.")
-          message.guild.channels.find(channel => channel.name === 'sorting-room').send (`<@${rMember}> Is in the sorting room! The Reaper requests you state your Xbox gamertag and Timezone. Additionally, if you have any questions for the Admin team before completing the sorting process and being removed from this channel, please let us know :smiley:`)
-          .then(console.log(chalk.yellow(`${message.author.username} Just accepted the rules and became a Reaper. We grow.`)))
-          .catch(console.error(chalk.red));
-          }
-          else{
-              return;
-          }
-        }
-    });
+/*
+//Need to get an IdiotKey
+client.idiotAPI = new Idiot.Client(client.config.idiotKey, {
+    dev: true
+});
+*/
 
 KlasaClient.defaultGuildSchema.add('mixerLiveChannel', 'TextChannel');
 KlasaClient.defaultGuildSchema.add('twitchLiveChannel', 'TextChannel');
@@ -86,16 +44,19 @@ KlasaClient.defaultGuildSchema.add('welcomeChannel', 'TextChannel');
 KlasaClient.defaultGuildSchema.add('commandChannel', 'TextChannel', {default: 'the-reaper'});
 KlasaClient.defaultGuildSchema.add('rulesChannel', 'TextChannel');
 KlasaClient.defaultGuildSchema.add('roastMemeChannel', 'TextChannel');
+KlasaClient.defaultGuildSchema.add('sortationChannel', 'TextChannel');
 
 KlasaClient.defaultGuildSchema.add('livePing', 'Boolean', {default: true});
 KlasaClient.defaultGuildSchema.add('sendRulesMessage', 'Boolean', {default: false});
 KlasaClient.defaultGuildSchema.add('sendWelcomeMessage', 'Boolean', {default: true}); 
+KlasaClient.defaultGuildSchema.add('memberSorting', 'Boolean', {default: false});
 KlasaClient.defaultGuildSchema.add('welcomeMessage', 'String');
 KlasaClient.defaultGuildSchema.add('rulesMessage', 'String');
 
 KlasaClient.defaultGuildSchema.add('defaultRole', 'role');
 KlasaClient.defaultGuildSchema.add('muted', 'role', {default: "Muted"});
 KlasaClient.defaultGuildSchema.add('admin', 'role', { default: "Admin"});
+KlasaClient.defaultGuildSchema.add('sortation', 'role');
 
 KlasaClient.defaultPermissionLevels
 .add(0, () => true)
@@ -103,8 +64,10 @@ KlasaClient.defaultPermissionLevels
 .add(6, ({ guild, member }) => guild && guild.settings.admin != null && member.roles.has(guild.settings.admin))
 //Server owner
 .add(7, ({ guild, member }) => guild && member === guild.owner, { fetch: true })
+/*
 //Official bot support team
-//.add(8, ({ client, author }) => client.config.botSupportTeam.includes(author.id), { fetch: true })
+.add(8, ({ client, author }) => client.config.botSupportTeam.includes(author.id), { fetch: true })
+*/
 //Bot owner with message
 .add(9, ({ author, client }) => author === client.owner, { break: true })
 //Bot owner without message
@@ -128,7 +91,6 @@ async () => {
         if (res.ok) { // res.status >= 200 && res.status < 300
             return res;
         } else {
-        // return message.reply(`There is no registered Twitch account with the name ${streamer}`)
     }
 }
 
@@ -168,10 +130,8 @@ var streamersTwitch = fs.readFileSync(streamerFolder + "/twitchStreamers.txt", "
 var streamerCountTwitch = streamersTwitch.length;
 
 for (t = 0; t < streamerCountTwitch; t++) {
-    var bootTime = (new Date).getTime(); //get the time the bot booted up
-    var halfHourAgo = bootTime - 1800000; //get the time 30min before the boot
-    // fs.writeFile("./user_time_twitch/" + streamersTwitch[t] + "_time.txt", halfHourAgo);
-    // console.log(chalk.magenta("Now stalking " + streamersTwitch[t] + " on Twitch!"));
+    var bootTime = (new Date).getTime();
+    var halfHourAgo = bootTime - 1800000;
 }
 console.log(chalk.magenta(`Now stalking ${streamerCountTwitch} streamers on Twitch!`));
 
@@ -364,27 +324,15 @@ function mixerCheck() {
                         var mixerStatus = data.online; //checks if they are online (its a double check just incase the above line miss fires)
                         if (mixerStatus == true) { //if the info JSON says they are live
                             var liveTime = (new Date).getTime(); //time the bot sees they went live
-                            // var rawdata = fs.readFileSync(streamerFolderMixer + "/" + streamersMixer[i] + ".json");
-                            // var streamerData = JSON.parse(rawdata);
+
                             var mixer_id = mixerID.toString()
                             var mixerD = new mixerJSON(mixer_id)
                             // console.log(mixerD.streamerData)
                             var lastLiveTime = mixerD.streamerData.liveTime;
 
-                            // var lastLiveTime = fs.readFileSync("./mixer_time/" + mixerInfo.token + "_time.txt", "utf-8"); //checks the last live time
-                            // var timeDiff = liveTime - lastLiveTime; //gets the diff of current and last live times
-
-
                             var timeDiff = liveTime - lastLiveTime; //gets the diff of current and last live times
-                            // console.log(liveTime)
-                            // console.log(lastLiveTime)
-                            // console.log(timeDiff)
-
 
                             if (timeDiff >= halfHour) { //if its been 30min or more
-                                // console.log(chalk.cyan(streamerData.name + " went live, as its been more than 30min!" + client.shard.id)); //log that they went live
-
-                                // client.shard.broadcastEval(client.liveMixer(mixerInfo.token)) //should tell all shards to do the following
 
                                 var args = [mixerInfo.token, mixerInfo.type.name, mixerInfo.name, mixerInfo.user.avatarUrl, mixerInfo.numFollowers, mixerInfo.viewersTotal, mixerInfo.user.level, mixerInfo.id]
                                 var v = JSON.stringify(args)
@@ -404,12 +352,6 @@ function mixerCheck() {
                             if (timeDiff < halfHour) { //if its been less than 30min
                                 // console.log(mixerInfo.token + " attempted to go live, but its been under 30min!"); //log that its been under 30min
                             }
-
-
-                            // delay(10).then(() => {
-                            // fs.writeFile("./mixer_time/" + mixerInfo.token + "_time.txt", liveTime); //update last live time regardless if they went live or not
-                            // });
-                            // fs.writeFile("./mixer_time/" + mixerInfo.token + "_time.txt", liveTime); //update last live time regardless if they went live or not
                         }
                     }
                 });
