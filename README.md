@@ -1,6 +1,6 @@
 # TheReaper Bot
-**Made for the Reaper Clan on Destiny 2.**
-*Usable on other servers*
+**Originally Made for the Reaper Clan on Destiny 2.**
+*Completely customisable bot to fit your server's needs.*
 
 **Setup:**
 1. ?conf show
@@ -9,7 +9,7 @@
 4. ?conf remove {option}
 
 **Support Server:**
-https://discord.gg/QuqtdsJ
+*Currently none*
 
 **Command List:**
 
