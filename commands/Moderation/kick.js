@@ -13,6 +13,7 @@ module.exports = class extends Command {
             bucket: 1,
             permissionLevel: 6,
             requiredSettings: ['admin', 'modLog'],
+            requiredPermissions: ['KICK_MEMBERS'],
             description: 'Kicks a user from the server.',
             usage: '<member:@member>',
             extendedHelp: 'No extended help available.'

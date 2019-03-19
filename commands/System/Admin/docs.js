@@ -12,6 +12,7 @@ module.exports = class extends Command {
 			guarded: true,
 			description: 'Generates documentation in different formats.',
 			permissionLevel: 10,
+			requiredPermissions: ['ATTACH_FILES'],
 			usage: '<html|markdown|plaintext|json>',
 			subcommands: true
 		});

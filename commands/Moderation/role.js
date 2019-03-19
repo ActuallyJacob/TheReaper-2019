@@ -13,6 +13,7 @@ module.exports = class extends Command {
             bucket: 1,
             permissionLevel: 6,
             requiredSettings: ['admin', 'modLog'],
+            requiredPermissions: ['MANAGE_ROLES', 'MANAGE_GUILD'],
             description: 'Give or take a user role.',
             usage: '<member:@member> [role:@role]',
             extendedHelp: 'No extended help available.'

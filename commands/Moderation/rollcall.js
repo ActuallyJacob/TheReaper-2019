@@ -13,6 +13,7 @@ module.exports = class extends Command {
             bucket: 1,
             permissionLevel: 6,
             requiredSettings: ['admin', 'modLog'],
+            requiredPermissions: ['MANAGE_ROLES', 'MANAGE_GUILD', 'MANAGE_CHANNELS'],
             description: 'Gives all users the "Roll Call" role and creates a roll-call channel in the category "Reaper Rooms"',
             usage: '',
             extendedHelp: 'No extended help available.'
@@ -114,7 +115,7 @@ module.exports = class extends Command {
             .setFooter("Sent via TheReaper")
             .setThumbnail(sender.displayAvatarURL())
             .setColor(0x9900FF);
-            
+
             if (settings.modLog != null) {
                 var modLog = server.channels.get(settings.modLog)
                 modLog.send({

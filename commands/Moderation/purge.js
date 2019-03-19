@@ -13,6 +13,7 @@ module.exports = class extends Command {
             bucket: 1,
             permissionLevel: 6,
             requiredSettings: ['admin', 'modLog'],
+            requiredPermissions: ['MANAGE_MESSAGES'],
             description: 'Deletes messages in bulk.',
             usage: '[amount:int{1}]',
             extendedHelp: 'No extended help available.'
