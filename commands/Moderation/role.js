@@ -57,6 +57,7 @@ module.exports = class extends Command {
           await(rMember.roles.remove(gRole.id));
           var channel = server.channels.get(settings.commandChannel)
           channel.send(`<@${rMember.id}> The Reaper has been sent to tell you that you no longer have the role of ${gRole.name} Contact an admin if you wish to enquire.`)
+          
           //Removed role embed
           const rRoleEmbed = new Discord.MessageEmbed()
           .setAuthor("TheReaper Moderation")

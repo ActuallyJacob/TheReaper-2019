@@ -75,7 +75,7 @@ KlasaClient.defaultGuildSchema.add('sortation', 'role');
 ##################
 */
 
-Client.defaultUserSchema.add('TODOs', 'any', { array: true });
+KlasaClient.defaultUserSchema.add('TODOs', 'any', { array: true });
 
 /*
 ###################

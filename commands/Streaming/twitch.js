@@ -42,6 +42,6 @@ module.exports = class extends Command {
 			.addField('Created On', creationDate, true)
 			.addField('Channel Views', body.views, true);
 
-		return msg.sendEmbed(embed);
+		return message.sendEmbed(embed);
 	}
 };

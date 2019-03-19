@@ -1,3 +1,5 @@
+const { Command } = require('klasa');
+
 module.exports = class extends Command {
 
 	constructor(...args) {
@@ -8,15 +10,15 @@ module.exports = class extends Command {
 		});
 	}
 
-	async run(msg, [when, text]) {
+	async run(message, [when, text]) {
 		const reminder = await this.client.schedule.create('reminder', when, {
 			data: {
-				channel: msg.channel.id,
-				user: msg.author.id,
+				channel: message.channel.id,
+				user: message.author.id,
 				text
 			}
 		});
-		return msg.sendMessage(`Ok, I created you a reminder with the id: \`${reminder.id}\``);
+		return message.sendMessage(`Ok, I created you a reminder with the id: \`${reminder.id}\``);
 	}
 
 };

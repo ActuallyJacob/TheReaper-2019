@@ -28,11 +28,11 @@ module.exports = class extends Command {
 		const buffer = Buffer.from(data);
 		const hash = createHash('sha1').update(data).digest('base64').substr(0, 7);
 		const duration = `Generated in ${stopwatch.stop()}`;
-		return this.msg.channel.sendFile(buffer, `commands_${hash}.${format}`, duration);
+		return this.message.channel.sendFile(buffer, `commands_${hash}.${format}`, duration);
 	}
 
-	async buildCommands(type, msg, normalize = false) {
-		this.msg = msg;
+	async buildCommands(type, message, normalize = false) {
+		this.message = message;
 		const stopwatch = new Stopwatch();
 		let categories;
 		const commands = normalize ? [] : {};
@@ -53,7 +53,7 @@ module.exports = class extends Command {
 						commands[cmd.category][cmd.subCategory] = [];
 					}
 					const description = typeof cmd.description === 'function' ?
-						cmd.description(msg.language) : cmd.description || 'No description.';
+						cmd.description(message.language) : cmd.description || 'No description.';
 
 					return commands[cmd.category][cmd.subCategory]
 						.push({ name: cmd.name, aliases: cmd.aliases, description });
@@ -64,8 +64,8 @@ module.exports = class extends Command {
 		return { commands, categories, longest, stopwatch };
 	}
 
-	async markdown(msg) {
-		const { commands, categories, stopwatch } = await this.buildCommands('markdown', msg);
+	async markdown(message) {
+		const { commands, categories, stopwatch } = await this.buildCommands('markdown', message);
 		const markdown = [];
 
 		markdown.push(`# ![${this.username}](${this.avatar(32)}) ${this.username}`);
@@ -92,8 +92,8 @@ module.exports = class extends Command {
 		this.finish(markdown.join('\n'), stopwatch, 'md');
 	}
 
-	async html(msg) {
-		const { commands, categories, stopwatch } = await this.buildCommands('html', msg);
+	async html(message) {
+		const { commands, categories, stopwatch } = await this.buildCommands('html', message);
 		const esc = this.escapeHtml;
 
 		let html = `<!DOCTYPE html><html>
@@ -134,8 +134,8 @@ module.exports = class extends Command {
 		this.finish(html, stopwatch, 'html');
 	}
 
-	async plaintext(msg) {
-		const { commands, categories, longest, stopwatch } = await this.buildCommands('plaintext', msg);
+	async plaintext(message) {
+		const { commands, categories, longest, stopwatch } = await this.buildCommands('plaintext', message);
 		const plaintext = [];
 
 		plaintext.push(`${this.username}\n`);
@@ -159,8 +159,8 @@ module.exports = class extends Command {
 		this.finish(plaintext.join('\n'), stopwatch, 'txt');
 	}
 
-	async json(msg) {
-		const { commands, categories, stopwatch } = await this.buildCommands('json', msg, true);
+	async json(message) {
+		const { commands, categories, stopwatch } = await this.buildCommands('json', message, true);
 
 		const meta = {
 			username: this.username,

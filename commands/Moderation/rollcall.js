@@ -114,6 +114,7 @@ module.exports = class extends Command {
             .setFooter("Sent via TheReaper")
             .setThumbnail(sender.displayAvatarURL())
             .setColor(0x9900FF);
+            
             if (settings.modLog != null) {
                 var modLog = server.channels.get(settings.modLog)
                 modLog.send({
