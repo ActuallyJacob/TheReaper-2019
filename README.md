@@ -11,41 +11,8 @@
 **Support Server:**
 *Currently none*
 
-**Command List:**
-
-*Misc*
-1. ?serverInfo
-2. ?user
-
-*Moderation*
-1. ?ban - this bans a user from the server
-2. ?kick - this kicks a user from the server
-3. ?list - this lists all users in a given role
-4. ?role - this adds or removes a given role from given user
-5. ?roleall - this adds a given role to everyone in server
-6. ?rollcall - this starts up a rollcall
-7. ?purge - this deletes a given amount of messages from a channel
-8. ?mute - this mutes a user
-9. ?unmute - this unmutes a user
-10. ?warn - this warns a user
-
-*Standard*
-1. ?accept - this accepts the given rules when a player joins the server
-2. ?suggest - this lets the user suggest something new
-3. ?help - lists the help command
-4. ?twitch - searches for a twitch user and gives info on that user
-5. ?mixer - searches for a mixer user and gives info on that user
-6. ?hug - hug someone!
-7. ?roast - roast someone
-8. ?event - create a custom community event (still in development)
-9. ?{meme-command} - lots of meme commands to use
-
-*Streaming*
-1. ?addMixer
-2. ?addTwitch
-3. ?delMixer
-4. ?delTwitch
-5. ?streamers
+**Bot's Purpose**
+*This is a multi-purpose bot. It can follow Twitch and Mixer streamers, has lots of Fun commands (Find them in the repo), Moderation commands, NSFW and Meme commands, a remindme command and lots of potential!*
 
 **To-Do:**
 1. Create levels system
