@@ -33,7 +33,7 @@ module.exports = class extends Command {
     const sender = message.author;
 	/////////////////////////////////////////
 	    if(channel !=(settings.roastMemeChannel)){
-            return message.channel.send(`The Reaper says you can only use this command in ${settings.roastMemeChannel}.`)
+            return message.channel.send(`The Reaper says you can only use this command in <#${settings.roastMemeChannel}>.`)
 		}
 		else{
 			let user = message.mentions.first();

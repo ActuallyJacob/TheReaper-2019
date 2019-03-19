@@ -1,3 +1,15 @@
+/*#################################################################################################################################################
+###################################################################################################################################################
+################  __  __                      _                       ____                   _             _     _                  ###############
+################ |  \/  |   ___   _ __ ___   | |__     ___   _ __    / ___|    ___    _ __  | |_    __ _  | |_  (_)   ___    _ __   ###############
+################ | |\/| |  / _ \ | '_ ` _ \  | '_ \   / _ \ | '__|   \___ \   / _ \  | '__| | __|  / _` | | __| | |  / _ \  | '_ \  ###############
+################ | |  | | |  __/ | | | | | | | |_) | |  __/ | |       ___) | | (_) | | |    | |_  | (_| | | |_  | | | (_) | | | | | ###############
+################ |_|  |_|  \___| |_| |_| |_| |_.__/   \___| |_|      |____/   \___/  |_|     \__|  \__,_|  \__| |_|  \___/  |_| |_| ###############
+################                                                                                                                    ###############
+###################################################################################################################################################
+###################################################################################################################################################                                                                                                                   
+*/
+
 const { Event } = require('klasa');
 
 module.exports = class extends Event {
@@ -52,56 +64,53 @@ module.exports = class extends Event {
                 return;
             }
         }
-
-        //this is for one of the key features of the bot: member sortation
         if(channel === settings.rulesChannel){
-            if(message.content.toLowerCase === "accept"){
-                message.delete().catch(O_o=>{});
-                let rMember = sender.user.id
+            message.delete().catch(O_o=>{});
+            if(message.content.toLowerCase() === "accept"){
+                let rMember = guildMember;
                 var role = server.roles.find(role => role.id === settings.sortation);
                 rMember.roles.add(role);
                 message.reply("The Reaper welcomes you to the family.")
-    
+            
                 if(server.id === config.myGuild){
                     server.channels.find(channel => channel.id === settings.sortationChannel).send (`<@${rMember}> Is in the sorting room! The Reaper requests you state your Xbox gamertag and Timezone. Additionally, if you have any questions for the Admin team before completing the sorting process and being removed from this channel, please let us know :smiley:`)
                     .then(console.log(chalk.yellow(`${message.author.username} Just accepted the rules and became a Reaper. We grow.`)))
                     .catch(console.error(chalk.red));
                 }
-    
+            
                 else{
-                    (server.channels.find(channel => channel.id === settings.sortationChannel).send(`<@${rMember}> Is in the sorting room!`))
+                    server.channels.find(channel => channel.id === settings.sortationChannel).send(`${rMember} Is in the sorting room!`)
                     .then(console.log(chalk.yellow(`${message.author.username} Just accepted the rules and became a Reaper. We grow.`)))
                     .catch(console.error(chalk.red));
                 }
-    
+            
                 if(!settings.sortationChannel){
                     if (settings.defaultRole != null) {
                         // console.log(member)
-                        sender.roles.add(settings.defaultRole)
+                        rMember.roles.add(settings.defaultRole)
                         .then(console.log(chalk.yellow(`${message.author.username} Just accepted the rules and became a Reaper. They were given the ${settings.defaultRole} role.`)))
                         .catch(console.error(chalk.red));
                     }
                 }
-    
+            
                 else{
                     return message.channel.send("The server owner hasn't set up a default role. **COME ON MAN IDK.**")
-                    .then(console.log(chalk.yellow(`${server} Has nothing set up right!`)))
                     .catch(console.error(chalk.red));
                 }
-    
+            
                 const accEmbed = new Discord.MessageEmbed()
                 .setAuthor("TheReaper Moderation")
                 .addField("Accepted Rules", `${sender.username} (${sender.tag})`)
                 .setFooter("Sent via TheReaper")
                 .setThumbnail(sender.displayAvatarURL())
                 .setColor(0x9900FF);
-                
+                        
                 if (settings.modLog != null) {
                     var modLog = server.channels.get(settings.modLog)
                     modLog.send({
                         embed: accEmbed
                     }).catch(err => console.log(err));
-    
+            
                 }
                 else{
                     return;

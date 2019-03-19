@@ -34,7 +34,7 @@ async run(message, [...params]) {
     const sender = message.author.username;
     /////////////////////////////////////////
     if(channel !=(settings.roastMemeChannel)){
-        return message.channel.send(`The Reaper says you can only use this command in ${settings.roastMemeChannel}.`)
+        return message.channel.send(`The Reaper says you can only use this command in <#${settings.roastMemeChannel}>.`)
     }
 	
     const roasts = [
