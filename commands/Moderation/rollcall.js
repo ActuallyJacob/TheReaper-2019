@@ -30,8 +30,6 @@ module.exports = class extends Command {
 		//
         const Discord = require ("discord.js");
         //
-        const MessageEmbed = require("discord.js");
-		//
         const sender = message.author;
         /////////////////////////////////////////
 
@@ -61,9 +59,9 @@ module.exports = class extends Command {
         //if aRole exists
         else{
             //exlude bots and admins then add role
-            if(!message.member.roles.some(r=>[settings.admin].includes(r.id)) ){
-                server.members.filter(m => !m.user.bot).map(async member => await member.roles.add(addRole));
-                }
+            server.members.filter(message => !message.user.bot && !server.member.aRole)
+            .map(async member => await member.roles.add(addRole));
+
             await message.channel.send(`${message.author.username}, role **${addRole.name}** was added to all members`);
 
             /*
@@ -71,13 +69,11 @@ module.exports = class extends Command {
             */
             ////////////////////////////////////////////////////////////////////////////////////////////////////////
             const uChannel = server.channels.find(channel => channel.name === 'roll-call');
-            const parentID = server.channels.find(channel => channel.name === 'reaper rooms' && type == 'category');
+            const parentID = server.channels.find(channel => channel.name === 'reaper rooms' && channel.type == 'category');
             ////////////////////////////////////////////////////////////////////////////////////////////////////////
             /*
             *What to do if there's no uChannel or parentID
-            */
 
-            /*
             These are for the permissions
             */
             const serverID = server.id;
@@ -107,12 +103,12 @@ module.exports = class extends Command {
                     ]
                 })
             };
-            await server.channels.find(channel => channel.name === 'roll-call').send('test');
+            await server.channels.find(channel => channel.name === 'roll-call').send(`${rollCall},` + "```" + "\nTime for Roll-Call! Sign here and I'll Remove you from this Channel Automatically, Meaning that you have Signed!" + "\n```");
 
             //modlog embed
             const rollcallEmbed = new Discord.MessageEmbed()
             .setAuthor("TheReaper Moderation")
-            .addField("Roled All users", "Rollcall")
+            .addField("Roled All users", "?rollcall command.")
             .addField("Moderator", `${sender.username} (${sender.tag})`)
             .addField("Role", addRole.name)
             .setFooter("Sent via TheReaper")

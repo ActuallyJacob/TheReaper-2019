@@ -13,8 +13,7 @@ module.exports = class extends Command {
             aliases: ['hugs'],
             permissionLevel: 0,
             description: 'Give someone a nice, big hug!',
-            usage: '',
-            extendedHelp: 'No extended help available.'
+            usage: '<user:user>',
         });
     }
 
@@ -31,8 +30,6 @@ module.exports = class extends Command {
 		//
         const Discord = require ("discord.js");
         //
-        const MessageEmbed = require("discord.js");
-		//
         const sender = message.author.username;
         /////////////////////////////////////////
 
@@ -45,7 +42,7 @@ module.exports = class extends Command {
         if (who == undefined) {
             return message.reply('Who you wanna hug?')
         } else {
-            message.channel.send(message.author.username + " gave " + who + " a nice, big, hug!");
+            message.channel.send(`${sender}` + " gave " + who + " a nice, big, hug!");
         }
     }
 };

@@ -31,8 +31,6 @@ module.exports = class extends Command {
 		//
         const Discord = require ("discord.js");
         //
-        const MessageEmbed = require("discord.js");
-		//
         const sender = message.author.username;
         /////////////////////////////////////////
         if(channel !=(settings.commandChannel)){
@@ -46,7 +44,7 @@ module.exports = class extends Command {
                 offline: '💔 Offline'
             };
             
-            const meEmbed = new MessageEmbed()
+            const meEmbed = new Discord.MessageEmbed()
             .setTitle(member.user.username)
             .setColor(0x9900FF)
             .setFooter("Sent via TheReaper")

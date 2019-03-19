@@ -9,11 +9,6 @@ module.exports = class extends Event {
         const Discord = require('discord.js')
 		const settings = member.guild.settings
 
-		if (settings.defaultRole != null) {
-			// console.log(member)
-			member.roles.add(settings.defaultRole);
-			return
-        }
         if(settings.welcomeChannel !=null && settings.sendWelcomeMessage == true) {
             const welcomeChannel = member.guild.channels.get(settings.welcomeChannel);
             var memberavatar = member.user.avatarURL

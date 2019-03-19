@@ -1,8 +1,12 @@
-const { KlasaClient, PermissionLevels, Schema } = require('klasa');
 const config = require('./config.json');
 const Discord = require ('discord.js');
 const fs = require('fs');
-const Idiot = require("idiotic-api");
+
+const { 
+    KlasaClient, 
+    PermissionLevels, 
+    Schema 
+} = require('klasa');
 
 const client = new KlasaClient({
     fetchAllMembers: false,
@@ -28,13 +32,20 @@ client.on("ready", () => {
       }, 10000); // Runs this every 10 seconds.
 });
 
-client.config = require('./config.json');
+client.config = config
 
 /*
 //Need to get an IdiotKey
+const Idiot = require("idiotic-api");
 client.idiotAPI = new Idiot.Client(client.config.idiotKey, {
     dev: true
 });
+*/
+
+/*
+###################
+###Guild Schemas###
+###################
 */
 
 KlasaClient.defaultGuildSchema.add('mixerLiveChannel', 'TextChannel');
@@ -54,9 +65,23 @@ KlasaClient.defaultGuildSchema.add('welcomeMessage', 'String');
 KlasaClient.defaultGuildSchema.add('rulesMessage', 'String');
 
 KlasaClient.defaultGuildSchema.add('defaultRole', 'role');
-KlasaClient.defaultGuildSchema.add('muted', 'role', {default: "Muted"});
-KlasaClient.defaultGuildSchema.add('admin', 'role', { default: "Admin"});
+KlasaClient.defaultGuildSchema.add('muted', 'role');
+KlasaClient.defaultGuildSchema.add('admin', 'role');
 KlasaClient.defaultGuildSchema.add('sortation', 'role');
+
+/*
+##################
+###User Schemas###
+##################
+*/
+
+Client.defaultUserSchema.add('TODOs', 'any', { array: true });
+
+/*
+###################
+####Permissions####
+###################
+*/
 
 KlasaClient.defaultPermissionLevels
 .add(0, () => true)

@@ -22,6 +22,9 @@ module.exports = class extends Command {
 
         var prefix = message.guild.settings.prefix
         var args = message.content.toString().toLowerCase().replace(prefix + 'addmixer', '').split(' ')
+        if(args === "undefined"){
+            return message.channel.send("The Requests a valid user.");
+        }
         var streamer = args[1]
 
         var mixerDir = __dirname.replace("commands/Streaming", "streamers/mixer").replace(String.raw `\commands\Streaming`, String.raw `\streamers\mixer`)

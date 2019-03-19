@@ -30,8 +30,6 @@ module.exports = class extends Command {
 		//
         const Discord = require ("discord.js");
         //
-        const MessageEmbed = require("discord.js");
-		//
         const sender = message.author;
         /////////////////////////////////////////
 
@@ -52,6 +50,7 @@ module.exports = class extends Command {
         if (amount >= 1 && amount <= 100) {
             message.channel.bulkDelete(amount)
             message.channel.send(`☑ Purged ${amount} message(s) from ${message.channel.name}`)
+            
             if (settings.modLog != null) {
                 var modLog = server.channels.get(settings.modLog)
                 modLog.send({

@@ -30,14 +30,12 @@ module.exports = class extends Command {
 		//
         const Discord = require ("discord.js");
         //
-        const MessageEmbed = require("discord.js");
-		//
         const sender = message.author.username;
         /////////////////////////////////////////
 
         let lRole = message.mentions.roles.first();
         if(!lRole){
-            return message.reply ("The Reaper requests a role.")
+            return message.reply ("The Reaper requests a role. **So do it**");
         }
         else{
             const listEmbed = new Discord.MessageEmbed()

@@ -30,8 +30,6 @@ module.exports = class extends Command {
 		//
         const Discord = require ("discord.js");
         //
-        const MessageEmbed = require("discord.js");
-		//
         const sender = message.author;
         /////////////////////////////////////////
 
@@ -43,11 +41,10 @@ module.exports = class extends Command {
         const user = message.mentions.users.first();
 
         //Get first mentioned role
-        let gRole = message.mentions.roles.first();
+        const gRole = message.mentions.roles.first();
         server.roles.get(gRole);
         if(!gRole) return message.reply("The Reaper could not locate the requested role/one was not established. `Attempt again.`");
         //this is for the embeds
-        const role = message.mentions.roles.first();
 
         //My guild only
         let fRole = server.roles.find(role => role.name === "Sorting Room");
@@ -65,14 +62,10 @@ module.exports = class extends Command {
           .setAuthor("TheReaper Moderation")
           .addField("Un-Roled User", `${user} (${user.tag})`)
           .addField("Moderator", `${sender.username} (${sender.tag})`)
-          .addField("Role", role)
+          .addField("Role", `${gRole}`)
           .setFooter("Sent via TheReaper")
           .setThumbnail(user.displayAvatarURL())
           .setColor(0x9900FF);
-          
-          message.channel.send({
-              embed: rRoleEmbed
-            });
             
             if (settings.modLog != null) {
                 var modLog = server.channels.get(settings.modLog)
@@ -96,7 +89,7 @@ module.exports = class extends Command {
           .setAuthor("TheReaper Moderation")
           .addField("Roled User", `${user} (${user.tag})`)
           .addField("Moderator", `${sender.username} (${sender.tag})`)
-          .addField("Role", role)
+          .addField("Role", `${gRole}`)
           .setFooter("Sent via TheReaper")
           .setThumbnail(user.displayAvatarURL())
           .setColor(0x9900FF);

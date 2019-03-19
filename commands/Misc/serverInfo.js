@@ -46,8 +46,6 @@ module.exports = class extends Command {
 		//
         const Discord = require ("discord.js");
         //
-        const MessageEmbed = require("discord.js");
-		//
         const sender = message.author.username;
         /////////////////////////////////////////
         if(channel !=(settings.commandChannel)){
@@ -57,28 +55,28 @@ module.exports = class extends Command {
         const {
             MessageEmbed
         } = require('discord.js');
-        if (message.guild.iconURL = null) {
+        if (server.iconURL = null) {
             var iconURL = "https://newagesoldier.com/wp-content/uploads/2016/12/masbot.png";
         } else {
-            var iconURL = message.guild.iconURL;
+            var iconURL = server.iconURL;
         }
 
         const serverEmbed = new MessageEmbed()
-            .setTitle(message.guild.name)
+            .setTitle(server.name)
             .setColor(0x9900FF)
             .setFooter("Sent via TheReaper")
             .setThumbnail(iconURL)
             .setTimestamp()
-            .addField("Server ID", message.guild.id)
-            .addField("Region", message.guild.region, true)
-            .addField("Owner", message.guild.owner, true)
-            .addField("Member Count", `${message.guild.memberCount - message.guild.members.filter(m=>m.user.bot).size} (${message.guild.members.filter(m=>m.user.bot).size} bots)`, true)
-            .addField("Roles", message.guild.roles.size, true)
-            .addField("Channels", message.guild.channels.size, true)
-            .addField('Explicit Filter', this.filterLevels[message.guild.explicitContentFilter], true)
-            .addField('Verification Level', this.verificationLevels[message.guild.verificationLevel], true)
-            .addField("Created At", message.guild.createdAt)
-            .addField("Joined Server At", message.guild.joinedAt)
+            .addField("Server ID", server.id)
+            .addField("Region", server.region, true)
+            .addField("Owner", server.owner, true)
+            .addField("Member Count", `${server.memberCount - server.members.filter(m=>m.user.bot).size} (${server.members.filter(m=>m.user.bot).size} bots)`, true)
+            .addField("Roles", server.roles.size, true)
+            .addField("Channels", server.channels.size, true)
+            .addField('Explicit Filter', this.filterLevels[server.explicitContentFilter], true)
+            .addField('Verification Level', this.verificationLevels[server.verificationLevel], true)
+            .addField("Created At", server.createdAt)
+            .addField("Joined Server At", server.joinedAt)
 
         message.channel.send({
             embed: serverEmbed

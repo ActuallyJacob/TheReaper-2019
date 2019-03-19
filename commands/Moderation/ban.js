@@ -30,8 +30,6 @@ module.exports = class extends Command {
 		//
         const Discord = require ("discord.js");
         //
-        const MessageEmbed = require("discord.js");
-		//
         const sender = message.author.username;
         /////////////////////////////////////////
 
@@ -41,6 +39,7 @@ module.exports = class extends Command {
 
         if (message.mentions.users.size == 0) return message.reply("The Reaper requires a specified user. **So do it**");
         const user = message.mentions.users.first();
+        if (user === this.client.id) return message.reply("I'm hurt.");
         if (user === message.member) return message.reply("Are you mad? **You can't ban yourself.** *-Reaper*");
         if (user === server.owner) return message.reply("I have stopped you from starting a military uprising, **you can't ban the server owner!**");
         if (user.kickable == false) return message.reply("I can't ban that guy! He's too powerful! *-Reaper*");
@@ -62,10 +61,6 @@ module.exports = class extends Command {
             .setFooter("Sent via TheReaper")
             .setThumbnail(user.displayAvatarURL())
             .setColor(0x9900FF);
-
-        message.channel.send({
-            embed: banEmbed
-        });
 
         if (settings.modLog != null) {
             var modLog = server.channels.get(settings.modLog)

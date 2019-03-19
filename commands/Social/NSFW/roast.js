@@ -30,10 +30,6 @@ async run(message, [...params]) {
     const settings = server.settings;
     //
     const Discord = require ("discord.js");
-    //
-    const MessageEmbed = require("discord.js");
-    //
-    const MessageAttachment = require("discord.js");
 	//
     const sender = message.author.username;
     /////////////////////////////////////////
@@ -183,7 +179,7 @@ async run(message, [...params]) {
         return; 
     }
     else {
-        let user = message.guild.member(message.mentions.users.first()) ;
+        let user = server.member(message.mentions.users.first()) ;
 		let randomRoast = Math.ceil(Math.random() * roasts.length);
 		if(!user){
 			return message.channel.send(roasts[randomRoast].roast + `\n **Roast #${randomRoast}**`);
