@@ -21,6 +21,7 @@ https://discord.gg/c38gzC5
 1. Create levels system (low priority)
 2. Create bot currency (low priority)
 3. Create a website with a full tutorial (high priority) for now use the support server
+4. Fix the **?addTwitch** command (high priority)
 
 **Updates:**
 
