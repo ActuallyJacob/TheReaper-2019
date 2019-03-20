@@ -10,26 +10,15 @@ module.exports = class extends Command {
             enabled: true,
             runIn: ['text'],
             cooldown: 0,
-            deletable: false,
             bucket: 1,
-            aliases: [],
-            guarded: false,
-            nsfw: false,
             permissionLevel: 6,
             requiredPermissions: [],
-            requiredSettings: [],
-            subcommands: false,
+            requiredSettings: ['commandChannel'],
             description: 'Lists streamers added to your server.',
-            quotedStringSupport: false,
-            // usage: '',
-            usageDelim: undefined,
-            // extendedHelp: ''
         });
     }
 
     async run(message, [...params]) {
-        // This is where you place the code you want to run for your command
-
         var userDirMixer = __dirname.replace("commands/Streaming", "streamers/mixer").replace(String.raw `\commands\Streaming`, String.raw `\streamers\mixer`)
         var userDirTwitch = __dirname.replace("commands/Streaming", "streamers/twitch").replace(String.raw `\commands\Streaming`, String.raw `\streamers\twitch`)
         const fs = require("fs");
@@ -52,8 +41,6 @@ module.exports = class extends Command {
             }
             message.channel.send(myStreamersMixer);
         });
-
-
 
         fs.readdir(userDirTwitch, (err, files) => {
             files.forEach(file => {

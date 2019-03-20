@@ -39,18 +39,28 @@ module.exports = class extends Event {
         /////////////////////////////////////////////////////////////////////////////////
 
         if(message.channel.name === "roll-call"){
-            if (!guildMember.roles.some(r=>[settings.admin, reaperID].includes(r.id)) ){
-                message.delete().catch(O_o=>{});
-                let rRole = server.roles.find(role => role.name === 'Roll Call');
-                guildMember.roles.remove(rRole)
-                .then(message => console.log(chalk.green(`${message.user.username} Just signed the Roll Call!`)))
-                .catch(console.error(chalk.red));
+            if (settings.admin != null){
+                if (!guildMember.roles.some(role=>[settings.admin, reaperID].includes(role.id)) ){
+                    message.delete().catch(O_o=>{});
+                    let rRole = server.roles.find(role => role.name === 'Roll Call');
+                    guildMember.roles.remove(rRole)
+                    .then(message => console.log(chalk.green(`${message.user.username} Just signed the Roll Call!`)))
+                    .catch(console.error(chalk.red));
                 }
             }
-
             else{
-                return;
+                if (!guildMember.roles.some(role=>[reaperID].includes(role.id)) ){
+                    message.delete().catch(O_o=>{});
+                    let rRole = server.roles.find(role => role.name === 'Roll Call');
+                    guildMember.roles.remove(rRole)
+                    .then(message => console.log(chalk.green(`${message.user.username} Just signed the Roll Call!`)))
+                    .catch(console.error(chalk.red));
+                }
             }
+        }
+        else{
+            return;
+        }
 
         //this is really only for my server but can be used anywhere if set up properly
         if(message.channel.name === "about-me"){

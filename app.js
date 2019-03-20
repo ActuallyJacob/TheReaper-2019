@@ -77,11 +77,11 @@ KlasaClient.defaultGuildSchema.add('livePing', 'Boolean', {default: true});
 KlasaClient.defaultGuildSchema.add('sendRulesMessage', 'Boolean', {default: false});
 KlasaClient.defaultGuildSchema.add('sendWelcomeMessage', 'Boolean', {default: true}); 
 KlasaClient.defaultGuildSchema.add('memberSorting', 'Boolean', {default: false});
+
 KlasaClient.defaultGuildSchema.add('welcomeMessage', 'String');
 KlasaClient.defaultGuildSchema.add('rulesMessage', 'String');
 
 KlasaClient.defaultGuildSchema.add('defaultRole', 'role');
-KlasaClient.defaultGuildSchema.add('muted', 'role');
 KlasaClient.defaultGuildSchema.add('admin', 'role');
 KlasaClient.defaultGuildSchema.add('sortation', 'role');
 

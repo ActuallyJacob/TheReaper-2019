@@ -5,8 +5,6 @@ const {
     MessageEmbed
 } = require('discord.js');
 
-const Discord = require ('discord.js')
-
 module.exports = class extends Command {
 
     constructor(...args) {
@@ -14,20 +12,12 @@ module.exports = class extends Command {
             name: 'mixer',
             enabled: true,
             runIn: ['text', 'dm'],
-            cooldown: 0,
-            deletable: false,
             bucket: 1,
-            aliases: [],
-            guarded: false,
-            nsfw: false,
             permissionLevel: 0,
             requiredPermissions: ['SEND_MESSAGES'],
             requiredSettings: ['commandChannel'],
-            subcommands: false,
             description: 'Gets information about a Mixer Streamer',
-            quotedStringSupport: false,
             usage: '[streamer:...string]',
-            usageDelim: undefined,
             extendedHelp: 'No extended help available.'
         });
     }
@@ -38,9 +28,9 @@ module.exports = class extends Command {
         if(channel !=(settings.commandChannel)){
             return message.reply(`Please make a channel called ${settings.commandChannel} to use this command.`)
         }
+
         else{
         const fetch = require('node-fetch')
-
         function checkStatus(res) {
             if (res.ok) { // res.status >= 200 && res.status < 300
                 return res;

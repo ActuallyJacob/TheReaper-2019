@@ -4,8 +4,6 @@ const {
 const {
     MessageEmbed
 } = require('discord.js');
-const query = new URLSearchParams([['client_id', 'CLIENT_ID_HERE']]);
-const fetch = require('node-fetch');
 
 module.exports = class extends Command {
 
@@ -24,24 +22,51 @@ module.exports = class extends Command {
         });
     }
 
-    async run(message, [twitchName]) {
-		const url = new URL(`https://api.twitch.tv/kraken/channels/${encodeURIComponent(twitchName)}`);
-		url.search = query;
+    async run(message, [streamer]) {
+        var settings = message.guild.settings
+        var channel = message.channel.id
+        if(channel !=(settings.commandChannel)){
+            return message.reply(`Please make a channel called ${settings.commandChannel} to use this command.`)
+        }
+        
+        else{
+        const fetch = require('node-fetch')
+        function checkStatus(res) {
+            if (res.ok) { // res.status >= 200 && res.status < 300
+                return res;
+            } else {
+                return message.reply(`I could not find ${streamer} on Twitch!`)
+            }
+        }
 
-		const body = await fetch(url)
-			.then(response => response.json())
-			.catch(() => { throw 'Unable to find account. Did you spell it correctly?'; });
+        fetch(`https://api.twitch.tv/kraken/channels/${streamer}?client_id=${this.client.config.twitch_id2}`)
+            .then(checkStatus)
+            .then(res => res.json())
+            .then(twitchInfo => {
 
-		const creationDate = this.timestamp.display(body.created_at);
-		const embed = new MessageEmbed()
-			.setColor(6570406)
-			.setThumbnail(body.logo)
-			.setAuthor(body.display_name, 'https://i.imgur.com/OQwQ8z0.jpg', body.url)
-			.addField('Account ID', body._id, true)
-			.addField('Followers', body.followers, true)
-			.addField('Created On', creationDate, true)
-			.addField('Channel Views', body.views, true);
+                if (twitchInfo.mature == false){
+                    var rate = 'Not Mature'
+                }
+                if (twitchInfo.mature == true){
+                    var rate = 'Mature'
+                }
 
-		return message.sendEmbed(embed);
-	}
+                const twitchStuff = new MessageEmbed()
+                    .setColor(0x9900FF)
+                    .setTitle(twitchInfo.display_name)
+                    .setFooter("Sent via The Reaper", "http://m8bot.js.org/img/profile.png")
+                    .setTimestamp()
+                    .setThumbnail(twitchInfo.logo)
+                    .setURL("http://twitch.tv/" + twitchInfo.display_name)
+                    .addField("Followers", twitchInfo.followers, true)
+                    .addField("Total Views", twitchInfo.views, true)
+                    .addField("Joined Twitch", twitchInfo.created_at, true)
+                    .addField("Audience", rate, true)
+                    .addField("Partnered", twitchInfo.partner, true)
+                message.channel.send({
+                    embed: twitchStuff
+                })
+            })
+        }
+    }
 };

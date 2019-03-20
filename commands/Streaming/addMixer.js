@@ -29,10 +29,7 @@ module.exports = class extends Command {
 
         var mixerDir = __dirname.replace("commands/Streaming", "streamers/mixer").replace(String.raw `\commands\Streaming`, String.raw `\streamers\mixer`)
         var streamerDir = __dirname.replace("commands/Streaming", "streamers").replace(String.raw `\commands\Streaming`, String.raw `\streamers`);
-        // var mixerDir = __dirname.replace("commands/Streaming", "streamers/mixer");
-        // var streamerDir = __dirname.replace("commands/Streaming", "streamers");
         var guildID = message.guild.id
-
 
         function checkStatus(res) {
             if (res.ok) { // res.status >= 200 && res.status < 300
@@ -74,18 +71,15 @@ module.exports = class extends Command {
             for (mi = 0; mi < serversAllowed.length; mi++) { //run for the total number of servers they are allowed on
 
                 if (this.guilds.map(c => c.id).includes(serversAllowed[mi])) {
-
                     var guild_id = serversAllowed[mi]
 
                     if (this.guilds.get(guild_id) != undefined) {
-
                         var gSettings = this.guilds.get(guild_id).settings
 
                         if (gSettings.mixerLiveChannel != undefined) {
                             var channelID = gSettings.mixerLiveChannel
 
                             if (channelID == null) {
-                                //  = this.guilds.get(guild_id).channels.find("name", settings.welcomeChannel).send
                                 var channelID = this.guilds.get(guild_id).channels.find(channel => channel.name === 'general').id;
                                 var liveMessage = "";
 
@@ -98,7 +92,8 @@ module.exports = class extends Command {
                                 var liveMessage = liveMessage + name + " is now live on Mixer!"
 
                                 this.channels.get(channelID).sendEmbed(liveEmbed, liveMessage); //send the live message to servers
-                            } else {
+                            } 
+                            else {
                                 var liveMessage = "";
 
                                 if (gSettings.livePing == false) {
@@ -111,17 +106,10 @@ module.exports = class extends Command {
 
                                 this.channels.get(channelID).sendEmbed(liveEmbed, liveMessage); //send the live message to servers
                             }
-
                         }
-
-
                     }
-
-
-
                 }
             }
-
         }
 
         fetch(`https://mixer.com/api/v1/channels/${streamer}`)
@@ -130,6 +118,7 @@ module.exports = class extends Command {
             .then(
                 mixerInfo => {
                     const mixerID = mixerInfo.id;
+
                     if (!fs.existsSync(mixerDir + '/' + mixerID + '.json')) { //if they are not in the database
                         let defaultMixer = {
                             name: mixerInfo.token,
@@ -138,6 +127,7 @@ module.exports = class extends Command {
                             liveTime: '0',
                             guilds: [message.guild.id]
                         };
+
                         let mixerJSON = JSON.stringify(defaultMixer);
                         fs.writeFileSync(mixerDir + '/' + mixerID + '.json', mixerJSON);
 
@@ -155,13 +145,9 @@ module.exports = class extends Command {
                         }).open();
 
                         function mixerJSONF(id) {
-
                             var rawdata = fs.readFileSync(mixerDir + "/" + id + ".json");
                             this.streamerData = JSON.parse(rawdata);
-
-                            // return streamerData;
                         }
-
 
                         var halfHour = 1800000; //time in milis that is 30min
                         var bootTime = (new Date).getTime(); //get the time the bot booted up
@@ -169,32 +155,20 @@ module.exports = class extends Command {
 
                         // mixerID
                         ca.subscribe(`channel:${mixerID}:update`, data => { //subscribing to the streamer
+
                             if (data.online == true && data.updatedAt != undefined) {
                                 var mixerStatus = data.online; //checks if they are online (its a double check just incase the above line miss fires)
+
                                 if (mixerStatus == true) { //if the info JSON says they are live
                                     var liveTime = (new Date).getTime(); //time the bot sees they went live
-                                    // var rawdata = fs.readFileSync(streamerFolderMixer + "/" + streamersMixer[i] + ".json");
-                                    // var streamerData = JSON.parse(rawdata);
+
                                     var mixer_id = mixerID.toString()
                                     var mixerD = new mixerJSONF(mixer_id)
-                                    // console.log(mixerD.streamerData)
                                     var lastLiveTime = mixerD.streamerData.liveTime;
 
-                                    // var lastLiveTime = fs.readFileSync("./mixer_time/" + mixerInfo.token + "_time.txt", "utf-8"); //checks the last live time
-                                    // var timeDiff = liveTime - lastLiveTime; //gets the diff of current and last live times
-
-
                                     var timeDiff = liveTime - lastLiveTime; //gets the diff of current and last live times
-                                    // console.log(liveTime)
-                                    // console.log(lastLiveTime)
-                                    // console.log(timeDiff)
-
 
                                     if (timeDiff >= halfHour) { //if its been 30min or more
-                                        // console.log(chalk.cyan(streamerData.name + " went live, as its been more than 30min!" + client.shard.id)); //log that they went live
-
-                                        // client.shard.broadcastEval(client.liveMixer(mixerInfo.token)) //should tell all shards to do the following
-
                                         var args = [mixerInfo.token, mixerInfo.type.name, mixerInfo.name, mixerInfo.user.avatarUrl, mixerInfo.numFollowers, mixerInfo.viewersTotal, mixerInfo.user.level, mixerInfo.id]
                                         var v = JSON.stringify(args)
                                         this.client.shard.broadcastEval(`(${liveMixer}).apply(this, ${JSON.stringify(args)})`)
@@ -202,44 +176,32 @@ module.exports = class extends Command {
                                         if (mixerInfo.token == mixerD.streamerData.name) {
                                             mixerD.streamerData.liveTime = liveTime
                                             fs.writeFileSync(mixerDir + '/' + mixerID + '.json', JSON.stringify(mixerD.streamerData));
-                                        } else {
+                                        }
+
+                                        else {
                                             mixerD.streamerData.name = mixerInfo.token
                                             mixerD.streamerData.liveTime = liveTime
                                             fs.writeFileSync(mixerDir + '/' + mixerID + '.json', JSON.stringify(mixerD.streamerData));
                                         }
-
                                     }
-
 
                                     if (timeDiff < halfHour) { //if its been less than 30min
                                         // console.log(mixerInfo.token + " attempted to go live, but its been under 30min!"); //log that its been under 30min
                                     }
-
-
-                                    // delay(10).then(() => {
-                                    // fs.writeFile("./mixer_time/" + mixerInfo.token + "_time.txt", liveTime); //update last live time regardless if they went live or not
-                                    // });
-                                    // fs.writeFile("./mixer_time/" + mixerInfo.token + "_time.txt", liveTime); //update last live time regardless if they went live or not
                                 }
                             }
-
-
-
-
-
                         });
-
-
-
                         return message.reply(`you have added ${mixerInfo.token} on Mixer to your server!`)
-
                     }
+
                     if (fs.existsSync(mixerDir + '/' + mixerID + '.json')) { //if they are in the database
                         let rawdata = fs.readFileSync(mixerDir + '/' + mixerID + '.json');
                         let streamerData = JSON.parse(rawdata);
+
                         if (streamerData.guilds.includes(guildID)) { //if they are already added to that server
                             return message.reply(`the Mixer streamer ${mixerInfo.token} has already been added to your server!`)
                         }
+
                         if (!streamerData.guilds.includes(guildID)) { //if they are not already added to that server
                             var oldGuilds = streamerData.guilds
                             oldGuilds.push(guildID)

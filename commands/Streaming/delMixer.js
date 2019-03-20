@@ -10,32 +10,19 @@ module.exports = class extends Command {
             enabled: true,
             runIn: ['text'],
             cooldown: 0,
-            deletable: false,
             bucket: 1,
-            aliases: [],
-            guarded: false,
-            nsfw: false,
             permissionLevel: 6, //any one with admin perms
-            requiredPermissions: [],
-            requiredSettings: [],
-            subcommands: false,
             description: 'Used to remove a Mixer streamer to your server.',
-            quotedStringSupport: false,
-            // usage: '',
-            usageDelim: undefined
-            // extendedHelp: 'No extended help available.'
         });
     }
 
     async run(message, [...params]) {
-        // This is where you place the code you want to run for your command
         const fs = require('fs')
         const fetch = require('node-fetch')
 
         var prefix = message.guild.settings.prefix
         var args = message.content.toString().toLowerCase().replace(prefix + 'addmixer', '').split(' ')
         var streamer = args[1]
-        // var mixerDir = __dirname.replace("commands/Streaming", "streamers/mixer");
         var mixerDir = __dirname.replace("commands/Streaming", "streamers/mixer").replace(String.raw `\commands\Streaming`, String.raw `\streamers\mixer`)
         var guildID = message.guild.id
 

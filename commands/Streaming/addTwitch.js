@@ -35,11 +35,8 @@ module.exports = class extends Command {
         var twitch_id = this.client.config.twitch_id
 
         function twitchJSON(id) {
-
             var rawdata = fs.readFileSync(twitchDir + "/" + id + ".json");
             this.streamerData = JSON.parse(rawdata);
-
-            // return streamerData;
         }
 
         function checkStatus(res) {
@@ -51,7 +48,7 @@ module.exports = class extends Command {
         }
         fetch(`https://api.twitch.tv/kraken/channels/${streamer}/?client_id=${twitch_id}`)
             .then(checkStatus)
-            .then(res => res.json())
+            .then(res => res.json/*( json => json )*/)
             .then(
                 twitchInfo => {
                     var name = twitchInfo.name;
@@ -70,16 +67,12 @@ module.exports = class extends Command {
                         fs.writeFileSync(streamerDir + '/twitchStreamers.txt', newTwitch)
 
                         return message.reply(`you have added ${name} on Twitch to your server!`)
-
-
-
-
                     }
+
                     if (fs.existsSync(twitchDir + '/' + name + '.json')) { //if they are in the database
 
                         var twitchD = new twitchJSON(name)
 
-                        // let rawdata = fs.readFileSync(twitchDir + '/' + name + '.json');
                         let streamerData = twitchD.streamerData
                         if (streamerData.guilds.includes(guildID)) { //if they are already added to that server
                             return message.reply(`the Twitch streamer ${name} has already been added to your server!`)

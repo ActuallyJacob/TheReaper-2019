@@ -12,32 +12,19 @@ module.exports = class extends Command {
             enabled: false,
             runIn: ['text'],
             cooldown: 0,
-            deletable: false,
             bucket: 1,
-            aliases: [],
-            guarded: false,
-            nsfw: false,
             permissionLevel: 6, //any one with admin perms
-            requiredPermissions: [],
-            requiredSettings: [],
-            subcommands: false,
             description: 'Used to remove a Twitch streamer to your server.',
-            quotedStringSupport: false,
-            // usage: '',
-            usageDelim: undefined
-            // extendedHelp: 'No extended help available.'
         });
     }
 
     async run(message, [...params]) {
-        // This is where you place the code you want to run for your command
         const fs = require('fs')
         const fetch = require('node-fetch')
 
         var prefix = message.guild.settings.prefix
         var args = message.content.toString().toLowerCase().replace(prefix + 'addtwitch', '').split(' ')
         var streamer = args[1]
-        // var twitchDir = __dirname.replace("commands/Streaming", "streamers/twitch");
         var twitchDir = __dirname.replace("commands/Streaming", "streamers/twitch").replace(String.raw `\commands\Streaming`, String.raw `\streamers\twitch`)
         var guildID = message.guild.id
         var twitch_id = this.client.config.twitch_id

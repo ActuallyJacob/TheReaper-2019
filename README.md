@@ -8,18 +8,20 @@
 3. ?conf reset {option}
 4. ?conf remove {option}
 
+*full setup turoial on website (comming soon)*
+*for now use the support server*
+
 **Support Server:**
-*Currently none*
+https://discord.gg/c38gzC5
 
 **Bot's Purpose**
 *This is a multi-purpose bot. It can follow Twitch and Mixer streamers, has lots of Fun commands (Find them in the repo), Moderation commands, NSFW and Meme commands, a remindme command and lots of potential!*
 
 **To-Do:**
-1. Create levels system
-2. Create currency
-3. Create "fun" commands ✅ (under commands/social)
-4. Create "event" command ✅ (still in development)
-5. Update full code and tidy it ✅
+1. Create levels system (low priority)
+2. Create bot currency (low priority)
+3. Create a website with a full tutorial (high priority) for now use the support server
+4. Fix the **?addTwitch** command (high priority)
 
 **Updates:**
 
@@ -30,6 +32,14 @@
 4. Recognises when a Mixer streamer goes live
 5. Announces when a Twitch streamer goes live
 6. Announces when a Mixer streamer goes live
+7. Added a slew of Social commands
+8. Added tool commands (e.g. ?remindme)
+9. Created member sortation process upon joining
+10. Changed DB to MongoDB
+11. Added customisable welcome message
+12. Most things in the bot is now fully customisable
+13. Re-Created the '?rollcall' command
+14. ModLogs enable for certain moderation commands
 
 # Powered by
 
