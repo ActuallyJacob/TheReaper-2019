@@ -31,6 +31,7 @@ module.exports = class extends Command {
 	}
 
 	list(message) {
+		const sender = message.author;
 		return message.send(`List of TODOs for this user: \`${sender.settings.TODOs.join('`, `')}\``);
 	}
 
