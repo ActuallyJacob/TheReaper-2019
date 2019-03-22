@@ -175,7 +175,7 @@ async run(message, [...params]) {
 	{ "number": 135, "roast": "You're so ugly, when you got robbed, the robbers made you wear their masks." }
     //{ "number": 136, "roast": "You're not completely useless, you can always serve as a bad example." }
 ];
-	if (message.author.bot){
+	if (sender.bot){
         return; 
     }
     else {

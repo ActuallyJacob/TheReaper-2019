@@ -44,8 +44,22 @@ module.exports = class extends Event {
                     message.delete().catch(O_o=>{});
                     let rRole = server.roles.find(role => role.name === 'Roll Call');
                     guildMember.roles.remove(rRole)
-                    .then(message => console.log(chalk.green(`${message.user.username} Just signed the Roll Call!`)))
+                    const signedEmbed = new Discord.MessageEmbed()
+                    .setAuthor("TheReaper Moderation")
+                    .addField("Roll Call", "?help rollcall for more information")
+                    .addField("Member Signed", `${sender.username} (${sender.tag})`)
+                    .setFooter("Sent via TheReaper")
+                    .setThumbnail(guildMember.user.displayAvatarURL())
+                    .setColor(0x9900FF)
+                    .setTimestamp();
+                    if (settings.modLog != null) {
+                        var modLog = server.channels.get(settings.modLog)
+                        modLog.send({
+                            embed: signedEmbed
+                        })
+                    .then(message => console.log(chalk.green(`${sender.username} Just signed the Roll Call!`)))
                     .catch(console.error(chalk.red));
+                    }
                 }
             }
             else{
@@ -53,8 +67,22 @@ module.exports = class extends Event {
                     message.delete().catch(O_o=>{});
                     let rRole = server.roles.find(role => role.name === 'Roll Call');
                     guildMember.roles.remove(rRole)
-                    .then(message => console.log(chalk.green(`${message.user.username} Just signed the Roll Call!`)))
+                    const signedEmbed = new Discord.MessageEmbed()
+                    .setAuthor("TheReaper Moderation")
+                    .addField("Roll Call", "?help rollcall for more information")
+                    .addField("Member Signed", `${sender.username} (${sender.tag})`)
+                    .setFooter("Sent via TheReaper")
+                    .setThumbnail(guildMember.user.displayAvatarURL())
+                    .setColor(0x9900FF)
+                    .setTimestamp();
+                    if (settings.modLog != null) {
+                        var modLog = server.channels.get(settings.modLog)
+                        modLog.send({
+                            embed: signedEmbed
+                        })
+                    .then(message => console.log(chalk.green(`${sender.username} Just signed the Roll Call!`)))
                     .catch(console.error(chalk.red));
+                    }
                 }
             }
         }
@@ -67,7 +95,7 @@ module.exports = class extends Event {
             let nRole = server.roles.find(role => role.name === 'About Me');
             if(!guildMember.roles.some(r =>[nRole].includes(r.name)) ){
                 guildMember.roles.add(nRole)
-                .then(console.log(chalk.blue(`${message.author.username} Wrote in the #about-me. Good man.`)))
+                .then(console.log(chalk.blue(`${sender.username} Wrote in the #about-me. Good man.`)))
                 .catch(console.error(chalk.red));
             }
             else{
@@ -84,13 +112,13 @@ module.exports = class extends Event {
             
                 if(server.id === config.myGuild){
                     server.channels.find(channel => channel.id === settings.sortationChannel).send (`<@${rMember}> Is in the sorting room! The Reaper requests you state your Xbox gamertag and Timezone. Additionally, if you have any questions for the Admin team before completing the sorting process and being removed from this channel, please let us know :smiley:`)
-                    .then(console.log(chalk.yellow(`${message.author.username} Just accepted the rules and became a Reaper. We grow.`)))
+                    .then(console.log(chalk.yellow(`${sender.username} Just accepted the rules and became a Reaper. We grow.`)))
                     .catch(console.error(chalk.red));
                 }
             
                 else{
                     server.channels.find(channel => channel.id === settings.sortationChannel).send(`${rMember} Is in the sorting room!`)
-                    .then(console.log(chalk.yellow(`${message.author.username} Just accepted the rules and became a Reaper. We grow.`)))
+                    .then(console.log(chalk.yellow(`${sender.username} Just accepted the rules and became a Reaper. We grow.`)))
                     .catch(console.error(chalk.red));
                 }
             
@@ -98,7 +126,7 @@ module.exports = class extends Event {
                     if (settings.defaultRole != null) {
                         // console.log(member)
                         rMember.roles.add(settings.defaultRole)
-                        .then(console.log(chalk.yellow(`${message.author.username} Just accepted the rules and became a Reaper. They were given the ${settings.defaultRole} role.`)))
+                        .then(console.log(chalk.yellow(`${sender.username} Just accepted the rules and became a Reaper. They were given the ${settings.defaultRole} role.`)))
                         .catch(console.error(chalk.red));
                     }
                 }
@@ -112,7 +140,7 @@ module.exports = class extends Event {
                 .setAuthor("TheReaper Moderation")
                 .addField("Accepted Rules", `${sender.username} (${sender.tag})`)
                 .setFooter("Sent via TheReaper")
-                .setThumbnail(sender.displayAvatarURL())
+                .setThumbnail(guildMember.user.displayAvatarURL())
                 .setColor(0x9900FF);
                         
                 if (settings.modLog != null) {

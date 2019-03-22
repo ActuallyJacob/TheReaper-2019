@@ -18,18 +18,20 @@ module.exports = class extends Command {
 	}
 
 	async add(message, [TODO, content]) {
-		await message.author.settings.update('TODOs', [...message.author.settings.TODOs, [TODO, content]], { action: 'overwrite' });
+		const sender = message.author;
+		await sender.settings.update('TODOs', [...sender.settings.TODOs, [TODO, content]], { action: 'overwrite' });
 		return message.send(`Added \`${TODO}\` TODO`);
 	}
 
 	async remove(message, [TODO]) {
-		const filtered = message.author.settings.TODOs.filter(([name]) => name !== TODO);
-		await message.author.settings.update('TODOs', filtered, { action: 'overwrite' });
+		const sender = message.author;
+		const filtered = sender.settings.TODOs.filter(([name]) => name !== TODO);
+		await sender.settings.update('TODOs', filtered, { action: 'overwrite' });
 		return message.send(`Removed \`${TODO}\` TODO`);
 	}
 
 	list(message) {
-		return message.send(`List of TODOs for this user: \`${message.author.settings.TODOs.join('`, `')}\``);
+		return message.send(`List of TODOs for this user: \`${sender.settings.TODOs.join('`, `')}\``);
 	}
 
 };

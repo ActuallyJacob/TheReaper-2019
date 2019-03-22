@@ -25,6 +25,8 @@ module.exports = class extends Command {
         *Pre-requisits
         */
         /////////////////////////////////////////
+        const guildMember = message.member;
+        //
         var server = message.guild;
         //
         const settings = server.settings;
@@ -42,11 +44,25 @@ module.exports = class extends Command {
                 data: {
                     name: 'Roll Call',
                     color: '#36393f',
+                    mentionable: true,
                 },
                 reason: 'Missing the required role.'
             })
             .then(console.log)
             .catch(console.error)
+            const rollcallRoleEmbed = new Discord.MessageEmbed()
+            .setAuthor("TheReaper Moderation")
+            .addField("Created Role", addRole.name)
+            .addField("Moderator", `${sender.username} (${sender.tag})`)
+            .setFooter("Sent via TheReaper")
+            .setThumbnail(guildMember.user.displayAvatarURL())
+            .setColor(0x9900FF);
+            if (settings.modLog != null) {
+                var modLog = server.channels.get(settings.modLog)
+                modLog.send({
+                    embed: rollcallRoleEmbed
+                })
+            }
             return message.channel.send(`"Roll Call" role created. Try the command again.`)
         };
 
@@ -63,7 +79,7 @@ module.exports = class extends Command {
             server.members.filter(message => !message.user.bot && !server.member.aRole)
             .map(async member => await member.roles.add(addRole));
 
-            await message.channel.send(`${message.author.username}, role **${addRole.name}** was added to all members`);
+            await message.channel.send(`${sender.username}, role **${addRole.name}** was added to all members`);
 
             /*
             *now that all the roles have been done lets get the channel done.
@@ -113,7 +129,7 @@ module.exports = class extends Command {
             .addField("Moderator", `${sender.username} (${sender.tag})`)
             .addField("Role", addRole.name)
             .setFooter("Sent via TheReaper")
-            .setThumbnail(sender.displayAvatarURL())
+            .setThumbnail(guildMember.user.displayAvatarURL())
             .setColor(0x9900FF);
 
             if (settings.modLog != null) {

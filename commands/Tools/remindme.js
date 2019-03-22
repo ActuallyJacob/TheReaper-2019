@@ -11,10 +11,11 @@ module.exports = class extends Command {
 	}
 
 	async run(message, [when, text]) {
+		const sender = message.author;
 		const reminder = await this.client.schedule.create('reminder', when, {
 			data: {
 				channel: message.channel.id,
-				user: message.author.id,
+				user: sender.id,
 				text
 			}
 		});

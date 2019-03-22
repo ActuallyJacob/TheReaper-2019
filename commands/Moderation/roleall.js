@@ -25,6 +25,8 @@ module.exports = class extends Command {
         *Pre-requisits
         */
         /////////////////////////////////////////
+        const guildMember = message.member;
+        //
         var server = message.guild;
         //
         const settings = server.settings;
@@ -57,7 +59,7 @@ module.exports = class extends Command {
         .addField("Moderator", `${sender.username} (${sender.tag})`)
         .addField("Role", gRole.name)
         .setFooter("Sent via TheReaper")
-        .setThumbnail(sender.displayAvatarURL())
+        .setThumbnail(guildMember.user.displayAvatarURL())
         .setColor(0x9900FF);
         
         if (settings.modLog != null) {

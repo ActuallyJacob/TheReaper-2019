@@ -25,6 +25,8 @@ module.exports = class extends Command {
         *Pre-requisits
         */
         /////////////////////////////////////////
+        const guildMember = message.member;
+        //
         var server = message.guild;
         //
         const settings = server.settings;
@@ -39,7 +41,7 @@ module.exports = class extends Command {
         .addField("Purged chat", `${message.channel.name}`)
         .addField("Moderator", `${sender.username} (${sender.tag})`)
         .setFooter("Sent via TheReaper")
-        .setThumbnail(sender.displayAvatarURL())
+        .setThumbnail(guildMember.user.displayAvatarURL())
         .setColor(0x9900FF);
 
         if (amount <= 0) {
