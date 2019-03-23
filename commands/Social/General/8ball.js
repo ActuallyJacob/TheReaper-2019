@@ -9,7 +9,7 @@ module.exports = class extends Command {
             runIn: ['text'],
             bucket: 1,
             permissionLevel: 0,
-            requiredSettings: ['roastMemeChannel'],
+            requiredSettings: [],
             extendedHelp: 'No extended help available.',
 			aliases: ['8', 'magic', '8ball', 'mirror'],
 			description: 'Magic 8-Ball, does exactly what the toy does.',
@@ -31,10 +31,6 @@ module.exports = class extends Command {
         const Discord = require ("discord.js");
         //
 		const sender = message.author.username;
-		//
-		if(channel !=(settings.roastMemeChannel)){
-            return message.channel.send(`The Reaper says you can only use this command in <#${settings.roastMemeChannel}>.`)
-		}
 		/////////////////////////////////////////
 		return message.reply(question.endsWith('?') ?
 			`🎱 ${answers[Math.floor(Math.random() * answers.length)]}` :

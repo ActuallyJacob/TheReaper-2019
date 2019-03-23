@@ -11,7 +11,7 @@ module.exports = class extends Command {
             bucket: 1,
             nsfw: true,
             permissionLevel: 0,
-            requiredSettings: ['roastMemeChannel'],
+            requiredSettings: ['roastChannel'],
             description: 'Insult someone.',
             extendedHelp: 'No extended help available.'
         });
@@ -32,11 +32,11 @@ module.exports = class extends Command {
 	//
     const sender = message.author;
 	/////////////////////////////////////////
-	    if(channel !=(settings.roastMemeChannel)){
-            return message.channel.send(`The Reaper says you can only use this command in <#${settings.roastMemeChannel}>.`)
+	    if(channel !=(settings.roastChannel)){
+            return message.channel.send(`The Reaper says you can only use this command in <#${settings.roastChannel}>.`)
 		}
 		else{
-			let user = message.mentions.first();
+			let user = message.mentions.members.first();
 			return message.sendMessage(`${user}, you know what? you're nothing but ${roll(start)} ${roll(middle)} ${roll(end)}.`);
 	    }
 	}

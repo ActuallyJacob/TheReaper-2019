@@ -10,7 +10,7 @@ module.exports = class extends Command {
             runIn: ['text'],
             bucket: 1,
             permissionLevel: 0,
-            requiredSettings: ['roastMemeChannel'],
+            requiredSettings: ['roastChannel'],
             extendedHelp: 'No extended help available.',
 			aliases: ['yomama'],
 			description: 'Yo momma is so fat, yo.'
@@ -32,8 +32,8 @@ module.exports = class extends Command {
         //
 		const sender = message.author.username;
 		//
-		if(channel !=(settings.roastMemeChannel)){
-            return message.channel.send(`The Reaper says you can only use this command in <#${settings.roastMemeChannel}>.`)
+		if(channel !=(settings.roastChannel)){
+            return message.channel.send(`The Reaper says you can only use this command in <#${settings.roastChannel}>.`)
 		}
         /////////////////////////////////////////
         

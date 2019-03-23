@@ -70,7 +70,8 @@ KlasaClient.defaultGuildSchema.add('modLog', 'TextChannel');
 KlasaClient.defaultGuildSchema.add('welcomeChannel', 'TextChannel');
 KlasaClient.defaultGuildSchema.add('commandChannel', 'TextChannel', {default: 'the-reaper'});
 KlasaClient.defaultGuildSchema.add('rulesChannel', 'TextChannel');
-KlasaClient.defaultGuildSchema.add('roastMemeChannel', 'TextChannel');
+KlasaClient.defaultGuildSchema.add('memeChannel', 'TextChannel');
+KlasaClient.defaultGuildSchema.add('roastChannel', 'TextChannel');
 KlasaClient.defaultGuildSchema.add('sortationChannel', 'TextChannel');
 
 KlasaClient.defaultGuildSchema.add('livePing', 'Boolean', {default: true});

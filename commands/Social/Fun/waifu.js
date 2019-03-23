@@ -9,7 +9,7 @@ module.exports = class extends Command {
             runIn: ['text'],
             bucket: 1,
             permissionLevel: 0,
-            requiredSettings: ['roastMemeChannel'],
+            requiredSettings: ['memeChannel'],
             extendedHelp: 'No extended help available.',
             description: 'Sends a randomly generated Waifu from thiswaifudoesnotexist.net' 
         });
@@ -30,8 +30,8 @@ module.exports = class extends Command {
         //
 		const sender = message.author.username;
 		//
-		if(channel !=(settings.roastMemeChannel)){
-            return message.channel.send(`The Reaper says you can only use this command in <#${settings.roastMemeChannel}>.`)
+		if(channel !=(settings.memeChannel)){
+            return message.channel.send(`The Reaper says you can only use this command in <#${settings.memeChannel}>.`)
 		}
         /////////////////////////////////////////
         

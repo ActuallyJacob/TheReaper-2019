@@ -12,7 +12,7 @@ module.exports = class extends Command {
             bucket: 1,
             nsfw: true,
             permissionLevel: 0,
-            requiredSettings: ['roastMemeChannel'],
+            requiredSettings: ['roastChannel'],
             description: 'Roast someone.',
             extendedHelp: 'No extended help available.'
         });
@@ -33,8 +33,8 @@ async run(message, [...params]) {
 	//
     const sender = message.author.username;
     /////////////////////////////////////////
-    if(channel !=(settings.roastMemeChannel)){
-        return message.channel.send(`The Reaper says you can only use this command in <#${settings.roastMemeChannel}>.`)
+    if(channel !=(settings.roastChannel)){
+        return message.channel.send(`The Reaper says you can only use this command in <#${settings.roastChannel}>.`)
     }
 	
     const roasts = [
