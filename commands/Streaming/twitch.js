@@ -15,7 +15,7 @@ module.exports = class extends Command {
             bucket: 1,
             permissionLevel: 0,
             requiredPermissions: ['SEND_MESSAGES'],
-            requiredSettings: ['commandChannel'],
+            requiredSettings: [],
             description: 'Gets information about a Twitch Streamer',
             usage: '[streamer:...string]',
             extendedHelp: 'No extended help available.'
@@ -23,13 +23,6 @@ module.exports = class extends Command {
     }
 
     async run(message, [streamer]) {
-        var settings = message.guild.settings
-        var channel = message.channel.id
-        if(channel !=(settings.commandChannel)){
-            return message.reply(`Please make a channel called ${settings.commandChannel} to use this command.`)
-        }
-        
-        else{
         const fetch = require('node-fetch')
         function checkStatus(res) {
             if (res.ok) { // res.status >= 200 && res.status < 300
@@ -67,6 +60,6 @@ module.exports = class extends Command {
                     embed: twitchStuff
                 })
             })
-        }
+        
     }
 };

@@ -15,7 +15,7 @@ module.exports = class extends Command {
             bucket: 1,
             aliases: ['server', 'guild'],
             permissionLevel: 0,
-            requiredSettings: ['commandChannel'],
+            requiredSettings: [],
             description: 'Shows information about the server you are in.',
             extendedHelp: 'No extended help available.'
         });
@@ -48,10 +48,6 @@ module.exports = class extends Command {
         //
         const sender = message.author.username;
         /////////////////////////////////////////
-        if(channel !=(settings.commandChannel)){
-            return message.reply(`Please use this command in ${settings.commandChannel}.`)
-        }
-        else{
         const {
             MessageEmbed
         } = require('discord.js');
@@ -81,5 +77,5 @@ module.exports = class extends Command {
         message.channel.send({
             embed: serverEmbed
         });
-    }}
+    }
 }; 

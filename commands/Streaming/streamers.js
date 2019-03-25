@@ -13,7 +13,7 @@ module.exports = class extends Command {
             bucket: 1,
             permissionLevel: 6,
             requiredPermissions: [],
-            requiredSettings: ['commandChannel'],
+            requiredSettings: [],
             description: 'Lists streamers added to your server.',
         });
     }
@@ -41,7 +41,7 @@ module.exports = class extends Command {
             }
             message.channel.send(myStreamersMixer);
         });
-
+/*
         fs.readdir(userDirTwitch, (err, files) => {
             files.forEach(file => {
                 var files = file;
@@ -58,5 +58,6 @@ module.exports = class extends Command {
             }
             message.channel.send(myStreamersTwitch);
         });
+*/
     }
 };

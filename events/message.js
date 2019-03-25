@@ -15,7 +15,13 @@ const { Event } = require('klasa');
 module.exports = class extends Event {
 
 	run(message) {
+        if (message.channel.type === 'dm'){
+            if (!message.content.includes("?todo")){
+                return console.log(`${message.author.username} (${message.author.tag}) Just typed "${message.content}" in DM.`);
+            }
+        }
         if (this.client.ready) this.client.monitors.run(message);
+        if(!message.channel.type === 'dm'){
         /////////////////////////////////////////////////////////////////////////////////
         const guildMember = message.member;
         //
@@ -156,4 +162,4 @@ module.exports = class extends Event {
             }
         }
 	}
-};
+}};

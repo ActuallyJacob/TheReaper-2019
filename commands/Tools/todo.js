@@ -4,7 +4,7 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			runIn: ['dm'],
+			runIn: ['dm', 'text'],
 			description: 'add|remove|list user\'s TODOs through DM',
 			extendedHelp: 'No extended help available.',
 			usage: '<add|remove|list:default> (TODO:string) [content:...string]',

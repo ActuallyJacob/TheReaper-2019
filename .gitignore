@@ -29,3 +29,9 @@ bwd
 ##command template##
 ####################
 command_template
+
+########################
+##non-working commands##
+########################
+commands\Streaming\addTwitch.js
+commands\Streaming\delTwitch.js

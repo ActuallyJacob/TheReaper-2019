@@ -55,9 +55,11 @@ module.exports = class extends Command {
         
         //Remove role from user if they have it already
         if(rMember.roles.has(gRole.id)){
-          await(rMember.roles.remove(gRole.id));
-          var channel = server.channels.get(settings.commandChannel)
-          channel.send(`<@${rMember.id}> The Reaper has been sent to tell you that you no longer have the role of ${gRole.name} Contact an admin if you wish to enquire.`)
+          await(rMember.roles.remove(gRole.id))
+          .catch((err) => {
+            message.react('❌');
+            message.channel.send(err.message);
+        });
           
           //Removed role embed
           const rRoleEmbed = new Discord.MessageEmbed()
@@ -79,13 +81,11 @@ module.exports = class extends Command {
         
         //Add role if they don't have it
         else{
-          await(rMember.roles.add(gRole.id));
-          var channel = server.channels.get(settings.commandChannel)
-          channel.send(`<@${rMember.id}> The Reaper has been sent to tell you that you now have the role of ${gRole.name}. Do not abuse your newfound power.`)
+          await(rMember.roles.add(gRole.id))
           .catch((err) => {
             message.react('❌');
             message.channel.send(err.message);
-        })
+        });
         //Add role embed
         const aRoleEmbed = new Discord.MessageEmbed()
           .setAuthor("TheReaper Moderation")

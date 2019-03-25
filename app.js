@@ -65,10 +65,9 @@ client.idiotAPI = new Idiot.Client(client.config.idiotKey, {
 ###################################################################################################################################################
 */
 KlasaClient.defaultGuildSchema.add('mixerLiveChannel', 'TextChannel');
-KlasaClient.defaultGuildSchema.add('twitchLiveChannel', 'TextChannel');
+//KlasaClient.defaultGuildSchema.add('twitchLiveChannel', 'TextChannel');
 KlasaClient.defaultGuildSchema.add('modLog', 'TextChannel');
 KlasaClient.defaultGuildSchema.add('welcomeChannel', 'TextChannel');
-KlasaClient.defaultGuildSchema.add('commandChannel', 'TextChannel', {default: 'the-reaper'});
 KlasaClient.defaultGuildSchema.add('rulesChannel', 'TextChannel');
 KlasaClient.defaultGuildSchema.add('memeChannel', 'TextChannel');
 KlasaClient.defaultGuildSchema.add('roastChannel', 'TextChannel');
@@ -147,7 +146,7 @@ async () => {
             //console.log(allMixer)
             fs.writeFileSync(streamerFolder + "/mixerStreamers.txt", allMixer.replace(".DS_Store", ""));
         });
-        
+/*###################################################################################################################
         fs.readdir(streamerFolderTwitch, (err, files) => {
             files.forEach(file => {
                 var files = file;
@@ -161,9 +160,11 @@ async () => {
             //console.log(allMixer)
             fs.writeFileSync(streamerFolder + "/twitchStreamers.txt", allTwitch.replace(".DS_Store", ""));
         });
+#####################################################################################################################
+*/
     }
 
-
+/*###################################################################################################################
 //Start Twitch
 var streamersTwitch = fs.readFileSync(streamerFolder + "/twitchStreamers.txt", "utf-8").split(", ");
 var streamerCountTwitch = streamersTwitch.length;
@@ -322,6 +323,8 @@ function liveTwitch(name, game, status, logo, followers, views) {
             }
         }
     }
+#####################################################################################################################
+*/
 
 //Start Mixer
 var streamersMixer = fs.readFileSync(streamerFolder + "/mixerStreamers.txt", "utf-8").split(", ");
