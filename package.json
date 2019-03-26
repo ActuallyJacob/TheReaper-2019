@@ -1,0 +1,45 @@
+{
+  "name": "thereaper",
+  "version": "1.0.0",
+  "description": "[![](https://img.shields.io/badge/node-js-blue.svg)](https://nodejs.org/en/) [![](https://img.shields.io/badge/discord-js-blue.svg)](https://github.com/hydrabolt/discord.js) [![](https://discordapp.com/api/guilds/352984490693623829/widget.png?style=shield)](https://discord.gg/JhyZARH)",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/the-maestro/TheReaper-2019"
+  },
+  "author": "Jacob Merali",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/the-maestro/TheReaper-2019/issues"
+  },
+  "homepage": "https://github.com/the-maestro/TheReaper-2019/blob/master/README.md",
+  "dependencies": {
+    "bson": "^4.0.1",
+    "canvas": "^2.4.0",
+    "carina": "^0.11.2",
+    "chalk": "^2.4.2",
+    "crypto": "^1.0.1",
+    "d3-cloud": "^1.2.5",
+    "delay": "^4.1.0",
+    "discord.js": "github:discordjs/discord.js#master",
+    "discord.js-aliases": "^1.1.6",
+    "faceapp": "^0.4.7",
+    "fs": "0.0.1-security",
+    "idiotic-api": "^0.2.11",
+    "klasa": "github:dirigeants/klasa",
+    "kurasuta": "^0.2.16",
+    "markovchain": "^1.0.2",
+    "moment": "^2.24.0",
+    "moment-duration-format": "^2.2.2",
+    "mongodb": "^3.1.13",
+    "mongodb-driver": "^0.1.0",
+    "node-fetch": "^2.3.0",
+    "npm": "^6.7.0",
+    "ws": "^6.1.3"
+  },
+  "devDependencies": {}
+}
