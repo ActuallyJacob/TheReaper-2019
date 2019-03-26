@@ -1,6 +1,6 @@
 # TheReaper Bot
 **Originally Made for the Reaper Clan on Destiny 2.**
-*This can also be invited to your own server, join the suppport server below if you need help setting up.*
+*This version of the bot is unavailiable to the public*
 
 **Setup:**
 1. ?conf show
@@ -11,16 +11,22 @@
 **Support Server:**
 https://discord.gg/c38gzC5
 
-**Bot's Purpose**
+**Bot's Purpose:**
 *This is a multi-purpose bot. Has lots of Fun commands (Find them in the repo), Moderation commands, NSFW and Meme commands, a remindme command and lots of potential!*
 
-**To-Do:**                               **Priority**
-1. Create levels system                  ==  Low  ==
-2. Create votes/polls                    ==  Low  ==
-3. Create giveaways                      ==  Low  ==
-4. Google, wiki, reddit, ty commands     ==  Low  ==
-5. Create bot currency                   ==  Low  ==
-6. Create a website with a full tutorial ==  Low  == *for now use the support server*
+**To-Do: Priority Level**
+1. Create levels system                  
+==  Low  ==
+2. Create votes/polls                    
+==  Low  ==
+3. Create giveaways                      
+==  Low  ==
+4. Google, wiki, reddit, ty commands     
+==  Low  ==
+5. Create bot currency                   
+==  Low  ==
+6. Create a website with a full tutorial 
+==  Low  == *for now use the support server*
 
 **Updates:**
 
