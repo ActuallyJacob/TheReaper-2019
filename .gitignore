@@ -9,29 +9,3 @@ package-lock.json
 ################
 node_modules
 
-#############
-##streamers##
-#############
-streamers
-
-##################
-##unused folders##
-##################
-serializers
-monitors
-languages
-inhibitors
-finalizers
-extendables
-bwd
-
-####################
-##command template##
-####################
-command_template
-
-########################
-##non-working commands##
-########################
-commands\Streaming\addTwitch.js
-commands\Streaming\delTwitch.js

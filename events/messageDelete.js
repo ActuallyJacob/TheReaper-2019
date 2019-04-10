@@ -27,26 +27,26 @@ module.exports = class extends Event {
         //
         const chalk = require('chalk');
         /////////////////////////////////////////////////////////////////////////////////
-        
-        if(!messageDelete.channel.name === 'roll-call'){
-            const msgDelEmbed = new Discord.MessageEmbed()
-            .setAuthor("TheReaper Moderation")
-            .addField("Deleted Message", messageDelete)
-            .addField("Sent by", `${sender.username} (${sender.tag})`)
-            .addField("From Channel", `${channel}`)
-            .setFooter("Sent via TheReaper")
-            .setThumbnail(avatar)
-            .setColor(0x9900FF)
-            .setTimestamp();
+        if(channel === "roll-call"){
+            return;
+        }
+        const msgDelEmbed = new Discord.MessageEmbed()
+        .setAuthor("TheReaper Moderation")
+        .addField("Deleted Message", messageDelete)
+        .addField("Sent by", `${sender.username} (${sender.tag})`)
+        .addField("From Channel", `${channel}`)
+        .setFooter("Sent via TheReaper")
+        .setThumbnail(avatar)
+        .setColor(0x9900FF)
+        .setTimestamp();
 
-            if (settings.modLog != null) {
-                var modLog = server.channels.get(settings.modLog)
-                modLog.send({
-                    embed: msgDelEmbed
-                })
-            .then(console.log(chalk.green(`${sender.username} Just Deleted a Message in ${server}`)))
-            .catch(console.error(chalk.red));
-            }
+        if (settings.modLog != null) {
+            var modLog = server.channels.get(settings.modLog)
+            modLog.send({
+                embed: msgDelEmbed
+            })
+        .then(console.log(chalk.green(`${sender.username} Just Deleted a Message in ${server}`)))
+        .catch(console.error(chalk.red));
         }
     }
 };

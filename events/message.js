@@ -96,7 +96,6 @@ module.exports = class extends Event {
             return;
         }
 
-        //this is really only for my server but can be used anywhere if set up properly
         if(message.channel.name === "about-me"){
             let nRole = server.roles.find(role => role.name === 'About Me');
             if(!guildMember.roles.some(r =>[nRole].includes(r.name)) ){

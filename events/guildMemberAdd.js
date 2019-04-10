@@ -12,17 +12,7 @@ module.exports = class extends Event {
         if(settings.welcomeChannel !=null && settings.sendWelcomeMessage == true) {
             const welcomeChannel = member.guild.channels.get(settings.welcomeChannel);
             var memberavatar = member.user.avatarURL
-            if(member.guild.id === config.myGuild){
-                var embed = new Discord.MessageEmbed()
-                .setColor('RANDOM')
-                .setThumbnail(memberavatar)
-                .addField(':bust_in_silhouette: | name: ', `${member}`)
-                .addField(':microphone2: | Welcome!', 'Welcome to the Reaper Clan server!\nPlease feel free to tell us about yourself in the <#524619664462970886> tab to introduce yourself to your fellow Reapers!\nTake a look around and dont forget to check out our <#526258822663241741> tab for more information.\nIf your Discord name is different to your GamerTag please change your nickname to resemble to your Xbox profile, followed by your timezone. IE: GamerTag (timezone). or ask an Admin Enjoy The reaper clan!')
-                .addField(':family_mwgb: | You are member number:', `${member.guild.memberCount}`)
-                .setFooter(`Server: ${member.guild.name}`)
-                .setTimestamp()
-            }
-            else{
+
                 if(settings.welcomeMessage !=null)
                 var embed = new Discord.MessageEmbed()
                 .setColor('RANDOM')
@@ -43,7 +33,7 @@ module.exports = class extends Event {
                     .setFooter(`Server: ${member.guild.name}`)
                     .setTimestamp()
                 }
-            }
+
             // console.log(message)
             welcomeChannel.send(embed)
         }
@@ -54,7 +44,7 @@ module.exports = class extends Event {
                 var embed = new Discord.MessageEmbed()
                 .setColor('RANDOM')
                 .setThumbnail(memberavatar)
-                .addField(':bust_in_silhouette: | name: ', `${member}`)
+                .addField(':bust_in_silhouette: | Name: ', `${member}`)
                 .addField(':microphone2: | Welcome!', 'Welcome to the Reaper Clan server!\nThank you for your interest in being apart of our community. **To gain full access to the server, we ask you to please read the rules below and accept them.** Once accepted, you will be taken to a sorting room, where the Admin team will be able to help and assist with any questions you may have.')
                 .addField(':white_check_mark: | **Rule. 1:**', 'As a first and foremost, to be accepted into this discord you must already be in the clan. This will be verified in the sorting room. ')
                 .addField(':white_check_mark: | **Rule. 2:**', 'Do not insult or harass other members of the clan, or outside of the clan. In doing so you will invoke administrative action.')
