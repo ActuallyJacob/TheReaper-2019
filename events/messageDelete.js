@@ -32,7 +32,7 @@ module.exports = class extends Event {
         }
         const msgDelEmbed = new Discord.MessageEmbed()
         .setAuthor("TheReaper Moderation")
-        .addField("Deleted Message", messageDelete)
+        .addField("Deleted Message", `${messageDelete}`)
         .addField("Sent by", `${sender.username} (${sender.tag})`)
         .addField("From Channel", `${channel}`)
         .setFooter("Sent via TheReaper")
